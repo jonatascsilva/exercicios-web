@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos #02</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+    <style>
+        input {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Eventos #02</h1>
+    <div id="div1">1</div>
+    <div id="resultado1">?</div>
+    <br>
+    <input type="text" placeholder="Digite e Selecione">
+    <div id="resultado2">?</div>
+    <script>
+        // Evento de mouse hover com apenas uma função (entrada do mouse)
+        const alternarDestaque = () => $('#div1').toggleClass('destaque')
+        // $('#div1').hover(alternarDestaque)
+
+        // Evento de mouse hover com apenas duas funções (trata a entrada e
+        // saída do mouse)
+        const adicionarDestaque = () => $('#div1').addClass('destaque')
+        const removerDestaque = () => $('#div1').removeClass('destaque')
+        $('#div1').hover(adicionarDestaque, removerDestaque)
+        // $('#div1').on('mouseenter mouseleave', alternarDestaque)  // Igual
+
+        // Evento que acontecerá apenas uma única vez
+        $('#div1').one('mouseenter', e => alert('AVISO! Você é genial :)'))
+
+        // Evento para tratar duplo clique
+        $('#div1').dblclick(e => $(e.target).fadeOut(1000).fadeIn(1000))
+
+        // Evento para tratar o redimensionamento da tela do website
+        $('#resultado1')
+                .html(`Largura: ${$(window).width()} e Altura: ${$(window).height()}`)
+
+        $(window).resize(function(e) {
+            const larguraWindow = $(e.target).width()
+            const alturaWindow = $(e.target).height()
+
+            $('#resultado1')
+                .html(`Largura: ${larguraWindow} e Altura: ${alturaWindow}`)
+        })
+
+        // Evento para tratar a seleção parcial de um texto
+        // Obs.: Para selecionar todos os inputs, é preciso usar o seletor :
+        $(':input').select(e => {
+            const inicioSelecao = e.target.selectionStart
+            const fimSelecao = e.target.selectionEnd
+
+            $('#resultado2')
+                .html(e.target.value.substring(inicioSelecao, fimSelecao))
+        })
+    </script>
+</body>
+</html>

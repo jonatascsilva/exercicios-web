@@ -1,0 +1,53 @@
+<h1>Formulário</h1>
+<hr>
+
+<!-- Formulário que vai enviar os dados para um pseudo back-end -->
+<!--<form action="http://localhost:3003/usuarios" method="POST">         Para uso futuro?! Cria um formulário e indica que fará um POST para o endereço apontado -->
+<form method="POST">
+    <input type="hidden" name="id-fomulario" value="3">             <!-- Crio um input escondido que irá me dar o id do formulario -->
+    <label>Nome
+        <input type="text" name="nome" />                               <!-- Crio um campo de input identificado como "nome", para ser captar informações (no caso, um nome) -->
+    </label>
+    <label>Senha
+        <input type="password" name="senha" />
+    </label>
+    <textarea name="biografia" id="" cols="30" rows="10"></textarea>
+    <div>
+        <input type="radio" name="genero" value="masc"> Masculino
+        <input type="radio" name="genero" value="masc"> Feminino
+    </div>
+    <div>
+        <input type="checkbox" name="regulamentoLido"> Li e aceito os regulamentos.
+    </div>
+    <select name="estado">
+        <option value="">Selecione o estado</option>
+        <option value="AC">Acre</option>
+        <option value="SP">São Paulo</option>
+        <option value="PR">Paraná</option>
+    </select>
+    <select name="interesses" multiple size="5">
+        <option value="php">PHP</option>
+        <option value="java">Java</option>
+        <option value="js">JavaScript</option>
+        <option value="py">Python</option>
+        <option value="c">C</option>
+        <option value="cplusplus">C++</option>
+    </select>
+
+    <button formaction="//localhost:3003/usuarios">Incluir</button><!-- Crio um botão que fará a ação (POST no http://localhost:3003/usuarios) com os dados de input preenchidos no formulário -->
+    <button formaction="//localhost:3003/usuarios/3">Alterar</button>
+</form>
+
+<style>
+    input,
+    textarea,
+    select {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type=radio],
+    input[type=checkbox] {
+        display: inline;
+    }
+</style>

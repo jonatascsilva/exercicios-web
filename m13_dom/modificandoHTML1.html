@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <script>
+        const body = document.querySelector('body')
+
+        // 1. Criando elementos HTML
+            // Crio elemento div com classe destaque e conteúdo textual Primeiro
+            const div1 = document.createElement('div')
+            div1.classList.add('destaque')
+            div1.innerHTML = 'Primeiro'
+
+            // Crio elemento div com atributo wm-atributo=valor e conteúdo textual Segundo
+            const div2 = document.createElement('div')
+            div2.setAttribute('wm-atributo', 'valor')
+            div2.innerHTML = 'Segundo'
+
+            // Crio elemento p com conteúdo textual Terceiro
+            const p = document.createElement('p')
+            p.innerHTML = 'Terceiro'
+
+            // Crio elemento div e adiciono o elemento p como filho desta div
+            const div3 = document.createElement('div')
+            div3.appendChild(p)
+
+            // Adicionando os elementos dentro do body (como filhos)
+            body.appendChild(div1)
+            body.appendChild(div2)
+            body.appendChild(div3)  // Automaticamente inclui seus filhos
+
+        // 2. Inserindo antes de outros já criados
+            const texto = document.createTextNode('Antes...')
+            div3.insertBefore(texto, div3.childNodes[0])
+        
+        // 3. Clonando elementos
+            const div4 = div3.cloneNode(true)           // True = Clona COM filhos
+            const div5 = div3.cloneNode(false)          // False = Clona sem filhos
+            body.appendChild(div4)                      // Observe que as cópias possuem atributos e classes iguais, só está tendo cor diferente por causa do CSS
+            body.appendChild(div5)
+        
+        // 4. Removendo elementos
+            body.removeChild(div5)
+    </script>
+</body>
+
+</html>

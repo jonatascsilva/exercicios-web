@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos #01</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+    <style>
+        input {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Eventos #01</h1>
+    <div id="posicao"></div>
+    <div id="cliques">Cliques: 0</div>
+    <input type="text" placeholder="Cor de Background">
+
+    <script>
+        function mostrarPosicaoDoMouse(e) {
+            $('#posicao').html(`x: ${e.clientX} y: ${e.clientY}`)
+        }
+
+        // Registrar um evento de um elemento pelo jQuery (ele adiciona alguns
+        // eventos novos também)
+        $('body').on('mousemove', mostrarPosicaoDoMouse)
+
+        // Remover o registro de um evento de um elemento
+        $('#posicao').mouseover(e => {
+            $('body').off('mousemove', mostrarPosicaoDoMouse)
+        })
+
+        // Readicionando de modo diferente hehe
+        $('#posicao').mouseleave(e => {
+            $('body').mousemove(mostrarPosicaoDoMouse)
+        })
+
+        // Registrar dois eventos para uma mesma função
+        $('#posicao').on('mouseenter mouseleave', mostrarPosicaoDoMouse)
+
+        // Adicionando evento de clique
+        let cliques = 0
+        $('body').click(e => {
+            $('#cliques').html(`Cliques: ${++cliques}`)
+        })
+
+        // Trocando cor do background por evento
+        $('input').keyup(function (e) {
+            // Obtendo value do elemento
+            const valor = $(this).val()
+            // Verificando valor recebido
+            if (valor.match(/#[\da-fA-F]{3,6}/)) {
+                $('body').css('background-color', valor)
+            }
+        })
+    </script>
+</body>
+</html>

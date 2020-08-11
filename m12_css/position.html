@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Position</title>
+    <style>
+        div {
+            font-size: 60px;
+            padding: 30px;
+            border: solid 5px #222;
+        }
+
+        .static {
+            /* position: static;                Esse é o padrão, não necessito habilitar, ele irá se ajustar conforme as propriedades do componente e dos outros em volta dele */
+            top: 100px;                         /* Parametros top e left no static são ignorados */
+            left: 100px;
+            background-color: steelblue;
+        }
+
+        .fixed {
+            position: fixed;                    /* Elemento irá obter as dimensões da viewport e permanecer nela ao longo da página, sobrepondo e mantendo posição mesmo rolando scroll */
+            bottom: 30px;
+            right: 0px;
+            background-color: tomato;
+        }
+
+        .relative1 {
+            position: relative;                 /* Posiciona com as dimensões, mas em relação ao seu elemento pai e em relação aos outros componentes em sua volta */
+            top: 5px;                           /* Observe que aqui ele toma o top da parte de baixo do static */
+            left: 50px;
+            background-color: seagreen;
+        }
+
+        .absolute1 {
+            position: absolute;                 /* Posiciona de forma absoluta em relação ao seu elemento pai (nesse caso, o viewport, ignora o body), ignorando posicionamento componentes filhos ou irmãos em sua volta */
+            top: 120px;
+            left: 350px;
+            background-color: violet;
+        }
+
+        /* Absolute dentro de relative */
+
+        .relative2 {
+            position: relative;
+            left: 250px;
+            top: 2000px;
+            width: 200px;
+            height: 200px;
+            background-color: slategray;
+        }
+
+        .absolute2 {
+            position: absolute;                 /* Ele se posiciona em relação ao seu elemento pai (desde que seja relative ou absolute, se for static, ele se posiciona novamente em relação à viewport) */
+            left: 10px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: orange;
+        }
+
+        .sticky {
+            position: -webkit-sticky;       /* Usado para ter compatibilidade com o Safari */
+            position: sticky;               /* Ele se comporta inicialmente como o static, mas no momento que há scroll e ele atinge a viewport ele se mantém visível (como um menu fixado) */
+            top: 0px;
+            background-color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="static">Static (Padrão)</div>
+    <div class="fixed">Fixed</div>
+    <div class="relative1">Relative</div>
+    <div class="absolute1">Absolute</div>
+
+    <div class="relative2">
+        <div class="absolute2"></div>
+    </div>
+
+    <div class="sticky">Sticky</div>
+    <p style="padding-bottom: 2000px;">Opa</p>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<h1 id="inicio">Links</h1>
+<hr>
+
+<!-- URL Absoluta
+    >   É uma boa prática usar somente // e não http:// ou https:// para que o
+    site nos informe automaticamente o protocolo usado, pois assim não forçarmos
+    o uso de http (deixando de usar criptografia pelo https, caso a página
+    fornecesse) ou o uso de https em páginas que não suportem, gerando possíveis
+    erros -->
+<a href="//www.google.com.br">Google - Nesta aba</a><br />
+<a href="//www.google.com.br" target="_blank">Google - Em nova aba</a><br /><br />
+
+<!-- URL Relativa -->
+<a href="index.html">Voltar - Acessa index dentro da pasta atual</a><br />
+<a href="/index.html">Voltar - Acessa index da pasta raíz da aplicação localhost ou website</a><br />
+<a href="../index.html">Voltar - Acessa index da pasta anterior</a><br /><br /><!-- Para ir voltando em outras pastas: ../../index.html -->
+
+<!-- Email -->
+<a href="mailto:email@empresa.com.br">Entre em contato</a><br />
+<a href="mailto:email@empresa.com.br?subject=Assunto do email&amp;body=Corpo do email">Entre em contato - Com algumas informações preenchidas</a><br /><br />
+
+<!-- Âncoras -->
+<a href="#noticia">Ir para a Notícia</a>
+
+<div id="noticia" style="position: absolute; top: 2000px;">
+    <h1>Notícia lá no final</h1>
+    <p>Oi, tudo bem?</p>
+    <a href="#inicio">Voltar para o início</a>
+</div>

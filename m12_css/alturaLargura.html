@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Altura e Largura</title>
+    <style>
+        /* 
+            Quem é o elemento pai renderizado (acima de todos os outros) em uma página
+        é o componente html. [É interessante até forçar o background do html para
+        transparent ou none, pois nem todos web browsers tem o background de html
+        da cor branca.]
+            O html é nativamente definido com display block, então apesar de sua largura
+        ser a página inteira, a altura não é, pois ela se ajusta dinamicamente com o
+        conteúdo de seus elementos filhos.
+            Body está dentro do elemento html e possui display block também, logo, herda
+        as mesmas características que seu pai e não ultrapassa suas dimensões.
+            Sabendo disso, se você definir tamanhos de altura relativos (ex.: 50%) nos
+        elementos filhos (como em divs, ou até mesmo no body) não acontecerá nada
+        graficamente, a não ser que você "force" usando dimensões fixas (px, etc.), ou,
+        definindo body com height 100vh ou definindo a altura do html e do body como 100%,
+        então assim eles irão ocupar a tela toda do dispositivo e os elementos filhos podem tomar
+        referências relativas de altura tranquilamente.
+        */
+        html {
+            background-color: none;
+            /* height: 100%; */
+        }
+
+        body {
+            font-size: 40px;
+            background-color: coral;
+            /* height: 100%;          */
+            height: 100vh;     
+        }
+
+        div {
+            background-color: seagreen;
+        }
+
+        span {
+            background-color: dodgerblue;
+        }
+
+        /*
+            Quando coloco inline-block com o intuito de colocar dois elementos filhos para ocupar 50%
+            de seu elemento pai, é importante notar que o line feed é considerado como um espaço, ex.:
+                </div>[Aqui terá um line feed]
+                <span>
+                Com isso, esses dois elementos não irão ficar lado a lado, mesmo com 50%. É possível resolver
+            isso:
+                > Removendo o line feed: 
+                    </div><span>
+                > Colocando um comentário:
+                    </div><!--
+                    --><span>
+                > Diminuindo para a largura relativa, para 48~49% (note que ficará um pequeno espaço entre os
+                elementos, terá que verificar se isso será aceitável)
+                > Definindo a font-size do elemento pai para 0px, no caso, o body. Só que é necessário definir
+                manualmente o tamanho das fontes para esses elementos filhos depois (já que vão herdar o font-size
+                do pai).
+        */
+        div,
+        span {
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Título</div><!--
+    --><span>Subtítulo</span>
+</body>
+
+</html>

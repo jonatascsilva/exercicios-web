@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Herança</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <style>
+        /* Alguns estilos são herdados automaticamente (como font-size), e outros não
+            é possível verificar os atributos herdados pelo inspect do browser */
+        
+        body {
+            font-family: 'Oswald', sans-serif;
+            font-size: 40px;
+            border: solid 3px red;
+            padding: 50px;
+        }
+
+        div {
+            border: inherit;
+            padding: inherit;
+        }
+
+        div > span>:nth-child(2) {
+            font-family: initial;
+            font-size: initial;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Herança</h1>
+    <div>Sou div e estou herdando do body: nativ. a fonte e explicitamente o padding + border
+        <span>
+            <p>Sou filho de div e estou herdando nativamente a fonte do body</p>
+            <p>Sou filho de div e cancelei minha herança nativa da fonte do body</p>
+        </span>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Anatomia CSS</title>
+    <style>
+        .seletor {
+            /* Atribuindo valores únicos */
+            color: #fff;
+            font-size: 30px;
+            text-align: center;                           /* Se colocar alguma parâmetro que não existe (ex.: blabalas), ele usa o valor default, nesse caso é o left*/
+            /* Atribuindo múltiplos valores */
+            border: solid 5px navy;                     /* Shorthand property (atribuindo vários parametros de uma vez, mais curto/direto) */
+            font-family: Arial, Helvetica, sans-serif;    /* Alternativas para fontes: Usa Arial, se não tiver usa Helvetica, se não usa sans-serif */
+            /* Funções pré-definidas no CSS */
+            width: calc(100% - 100px);
+            background-color: rgb(34, 153, 189);
+        }
+
+        /* Usando uma pseudo-classe */
+        .seletor:hover {
+            background-color: gray;
+        }
+
+        /* Usando um pseudo-elemento */
+        .seletor::first-letter {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        /* Padrões de nomenclatura? */
+        /* > dash-cas ou camelCase? */
+        /* > Qualquer um, desde que
+           use em todo o projeto... */
+    </style>
+</head>
+
+<body>
+    <div class="seletor">Conteúdo</div>
+</body>
+
+</html>

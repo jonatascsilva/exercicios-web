@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Unidades #02</title>
+    <style>
+        /* Verificando comportamento com o uso da % em elementos com position diferentes */
+        
+        .fora {
+            position: relative;
+            background-color: orange;
+            height: 400px;
+            width: 400px;
+            padding: 50px;
+        }
+
+        .dentro {
+            background-color: mediumvioletred;
+            height: 100px;
+            width: 100%;
+            position: static;       /* Valor padrão, o width terá o mesmo tamanho que o conteúdo da div fora */
+            position: relative;     /* Com 100%, o width terá o mesmo tamanho que a largura do conteúdo da div fora */
+            position: absolute;     /* Com 100%, o width terá o mesmo tamanho que a largura do conteúdo + padding da div fora (dando overflow) */
+            position: fixed;        /* Com 100%, o width terá o mesmo tamanho que a largura do viewport (dando overflow) */
+        }
+    </style>
+</head>
+<body>
+    <div class="fora">
+        <div class="dentro"></div>
+    </div>
+</body>
+</html>

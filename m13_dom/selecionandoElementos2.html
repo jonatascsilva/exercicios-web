@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #02</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body class="conteudo exercicio">
+    <div id="primeiro">#primeiro</div>
+    <div>Segundo</div>
+    <div class="terceiro ultimo"><span wb-attrib>.terceiro .ultimo</span></div>
+    <script>              
+        // 1. Selecionando apenas um elemento com um determinado filtro por seletor(es)
+        document.querySelector('#primeiro').classList.add('destaque')
+
+        // 2. Selecionando todos os elementos com um determinado filtro por seletor(es)
+        const selecionar = seletor =>
+            document.querySelectorAll(seletor).forEach(e => e.classList.add('destaque'))    // Retorna um NodeList (e não HTMLCollection, como nos métodos get da aula 1), por isso possui função forEach
+                                                                                            // mas mesmo assim, não é um array (não pode se fazer map, reduce...)
+        const deselecionar = seletor =>
+            document.querySelectorAll(seletor).forEach(e => e.classList.remove('destaque'))
+
+            // Alguns exemplos de filtros...
+
+            // 2.1 Selecionando com apenas um filtro
+            selecionar('div')
+
+            // 2.2 Selecionando com dois filtros
+            deselecionar('*')
+            selecionar(".terceiro > .ultimo")   // Elemento com classe ultimo dentro de um elemento com classe terceiro
+            selecionar(".terceiro, .ultimo")    // Elemento com as classes: terceiro OR ultimo
+            selecionar('.terceiro.ultimo')      // Elemento com as classes: terceiro AND ultimo
+
+            // 2.3 Selecionando tudo exceto o determinado no filtro usando NOT
+            deselecionar('*')
+            selecionar(':not(#primeiro)')
+
+            // 2.4 Selecionando o primeiro child de qualquer elemento
+            deselecionar('*')
+            selecionar(':nth-child(1)')
+
+            // 2.5 Selecionando o primeiro elemento do tipo div
+            deselecionar('*')
+            selecionar('div:nth-of-type(1)')
+
+            // 2.6 Selecionando o elemento com um determinado atributo
+            deselecionar('*')
+            selecionar('[wb-attrib]')
+    </script>
+</body>
+</html>

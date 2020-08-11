@@ -1,0 +1,169 @@
+<h1>Vídeos</h1>
+<hr>
+<p>Execute este arquivo diretamente por sua URL para executar o script dele.</p>
+
+<!-- Vídeos -->
+<!-- Forma padrão
+    <video src="link" id="video1"></video> -->
+
+<!-- Vídeo com tag source
+    > Parametros:
+        - controls: exibe os controles para o vídeo
+        - autoplay: autoplay?!
+        - controsList: definir algumas opções para o controle, como impedir o download
+    > Com a tag source posso colocar várias fontes (de links de vídeos) diferentes,
+    assim, para poder forncer vários tipos de formatos caso um browser não suporte,
+    por exemplo -->
+<video id="meuVideo" width="800">
+    <source src="//files.cod3r.com.br/curso-web/video.mp4" type="video/mp4" />
+    Seu browser não suporta a tag de vídeo.
+</video>
+
+<!-- Desafio
+    > Desativar os controles nativos do HTML
+    > Criar uma barra de progresso para um vídeo
+    > Criar um botão de play/pause -->
+<div wm-progresso="meuVideo" class="progresso">
+    <div></div>
+</div>
+
+<div>
+    <button wm-play="meuVideo">Play</button>
+    <div wm-duracaoVideo="meuVideo" class="duracao-video"><span wm-tempoAtual></span><span> / </span><span wm-duracao></span></div>
+</div>
+
+<style>
+    .progresso {
+        position: absolute;
+        width: 780px;
+        height: 8px;
+        background-color: #ddd;
+        border: double 1px #ddd;
+        border-radius: 5px;
+        margin: 10px;
+    }
+
+    .progresso > div {
+        width: 0%;
+        height: 100%;
+        background-color: #999;
+        color: white;
+        text-align: right;
+        font-size: 14px;
+    }
+
+    button {
+        position: absolute;
+        margin: 10px;  
+    }
+
+    .duracao-video {
+        position: absolute;
+    }
+
+    .duracao-video > span {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        margin-right: 1px;
+        margin-left: 1px;
+    }
+</style>
+
+<script>
+    // Essa é a minha solução, a do professor está no github
+
+    const video = document.getElementById('meuVideo')
+    const barraProgressoVideoTotal = document.querySelector("[wm-progresso='meuVideo']")
+    const barraProgressoVideo = document.querySelector('[wm-progresso] > div')
+    const btnPlay = document.querySelector('[wm-play]')
+    const textoDuracaoVideo = document.querySelector('[wm-duracao]')
+    const textoTempoAtualVideo = document.querySelector('[wm-tempoAtual]')
+    const divTempoDuracaoVideo = document.querySelector('[wm-duracaoVideo]')
+
+    // Define posições dos objetos
+    btnPlay.style.left = video.getBoundingClientRect().left
+    btnPlay.style.top = video.getBoundingClientRect().bottom + 10
+
+    divTempoDuracaoVideo.style.left = video.offsetWidth - 70
+    divTempoDuracaoVideo.style.top = video.getBoundingClientRect().bottom + 23
+
+    
+    barraProgressoVideoTotal.style.width = video.offsetWidth - 20
+    barraProgressoVideoTotal.style.top = btnPlay.getBoundingClientRect().top - 30
+
+    // Obtém metadados
+    let duracaoVideo = 0;
+    let tempoAtualVideo = 0;
+
+    video.addEventListener('loadedmetadata', function() {
+        duracaoVideo = (video.duration).toFixed(0);
+
+        textoTempoAtualVideo.textContent = '0:00'
+        textoDuracaoVideo.textContent = `${Math.floor(duracaoVideo / 60)}:${duracaoVideo}`
+    });
+
+    // Listeners do mouse
+    video.onmouseleave = () => {
+        setTimeout(() => {
+            btnPlay.style.display = 'none'
+            barraProgressoVideoTotal.style.display = 'none'
+            divTempoDuracaoVideo.style.display = 'none'
+        }, 2000)
+    }
+
+    video.onmouseenter = () => {
+        btnPlay.style.display = 'block'
+        barraProgressoVideoTotal.style.display = 'block'
+        divTempoDuracaoVideo.style.display = 'flex'
+
+        setTimeout(() => {
+            btnPlay.style.display = 'none'
+            barraProgressoVideoTotal.style.display = 'none'
+            divTempoDuracaoVideo.style.display = 'none'
+        }, 2000)
+    }
+
+    // Controle do vídeo
+    btnPlay.onclick = () => {
+        if (video.paused) {
+            video.play()
+            btnPlay.textContent = 'Pause'
+        } else {
+            video.pause()
+            btnPlay.textContent = 'Play'
+        }
+    }
+
+    video.onclick = () => {
+        video.paused === true ? video.play() : video.pause()
+    }
+
+    video.onplay = () => {
+        atualizaBarraDeProgresso()
+    }
+
+    video.onended = () => {
+        btnPlay.textContent = 'Reiniciar'
+    }
+
+    function atualizaBarraDeProgresso(estado) {
+        const intervalAtualizaGraficoBarraDeProgresso = setInterval(atualizaGraficoBarraDeProgresso, 10)
+
+        function atualizaGraficoBarraDeProgresso() {
+            if (video.paused === false) {
+                tempoAtualVideo = (video.currentTime).toFixed(0);
+
+                porcentagemExecutadaVideo = (tempoAtualVideo * 100) / duracaoVideo
+                barraProgressoVideo.style.width = porcentagemExecutadaVideo + '%'
+                
+                textoTempoAtualVideo.textContent = `${Math.floor(tempoAtualVideo / 60)}:${tempoAtualVideo}`
+
+                atualizaBarraDeProgresso('iniciar')
+            } else {
+                clearInterval(intervalAtualizaGraficoBarraDeProgresso)
+            }
+        }
+    }
+</script>

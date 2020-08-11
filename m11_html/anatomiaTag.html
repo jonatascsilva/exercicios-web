@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<!-- Tag com corpo -->
+<tag>
+    <!-- Olá, sou um comentário dentro de uma tag personalizada (não existente nativamente no HTML)! -->
+    <!-- Estou dentro de um corpo da tag! -->
+    <tag2>
+        Sou filha da tag
+        <TAG3>
+            Sou filha da tag2, e meu nome é case insensitive (não importa se é MAIUSCULA ou minuscula)
+        </TAG3>
+    </tag2>
+</tag>
+
+<!-- Tag sem corpo -->
+<tag>                   <!-- Forma padrão -->
+<tag />                 <!-- Boa prática é usar nelas uma barra para que saiba que não há fechamento -->
+
+<!-- Tag com atributos -->
+<tag param1="valor1" param2="valor2">
+    <!-- Corpo da tag -->
+</tag>
+
+<tag paramA="valorA" paramB="valorB" />
+
+<tag param1="valor1" mascara-cpf>
+    <!-- Posso criar parametros personalizados (no caso, sem valor pois o HTML irá atribuir true para ela) -->
+    <!-- e criar um código JS para fazer uma determinada ação nas tags que tiverem esse parametro -->
+    <!-- nesse caso de exemplo, colocar uma máscara de CPF nos valores -->
+</tag>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos #03</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+    <style>
+        input {
+            font-size: 2em;
+        }
+
+        #resultado {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Eventos #03</h1>
+    <div id="div1">1</div>
+    <div id="div2">1</div>
+    <input id="input1" type="text" placeholder="Digite Algo!">
+    <span id="resultado"></span>
+    <span id="info-browser"></span>
+
+    <script>
+        // Criar função para exibir os dados de um determinado evento sobre
+        // elementos da página
+        function exibirDadosEventos(e) {
+            $('#resultado').empty()
+            const resultadoUm = $('<div>')
+            const resultadoDois = $('<div>')
+
+            $('#resultado').append(resultadoUm, resultadoDois)
+
+            // Coluna 1
+                // Target: Informa quem foi o elemento que disparou o evento
+                resultadoUm.append(`target: ${e.target.id}`)
+
+                // RelatedTarget: Informa o target onde o mouse estava apontando,
+                // pode usar para fazer um log de onde o mouse veio e pra onde ele
+                // aponta agora (por exemplo, ver MDN)
+                const relTarget = e.relatedTarget ? e.relatedTarget.tagName : null
+                resultadoUm.append(`<br>relatedTarget: ${relTarget}`)
+
+                // Type: Retorna o tipo do evento que ocorreu
+                resultadoUm.append(`<br>type: ${e.type}`)
+
+                // Which: Retorna qual botão foi pressionado durante o evento (para
+                // mouse e/ou teclado)
+                resultadoUm.append(`<br>which: ${e.which}`)
+
+                // MetaKey: Retorna se botão Meta (tecla Windows e tecla Command no
+                // Mac)
+                resultadoUm.append(`<br>metaKey: ${e.metaKey}`)
+            
+            // Coluna 2
+
+                // Explicação: https://i.stack.imgur.com/8ABHV.png
+                // - ScreenX/Y: Retorna a resolução da tela do monitor
+                // - ClientX/Y: Retorna a resolução da viewport atual do do
+                //   conteúdo do elemento (menos a barra de rolagem, para a
+                //   resolução horizontal)
+                // - PageX/Y (Document): Retorna a resolução completa do
+                //     document/página carregada (independente se há scroll)
+
+                // Page: Neste evento, retorna a posição do mouse em relação ao
+                // tamanho total do documento/página
+                resultadoDois.append(`pageX: ${e.pageX}`)
+                resultadoDois.append(`<br>pageY: ${e.pageY}`)
+
+                // Client: Neste evento, retorna a posição do mouse em relação ao
+                // tamanho da viewport
+                resultadoDois.append(`<br>clientX: ${e.clientX}`)
+                resultadoDois.append(`<br>clientY: ${e.clientY}`)
+
+                // Posso passar atributos personalizados, caso queira, basta
+                // registrar o atributos como objeto no evento
+                const personalizado = e.data ? e.data.personalizado : null
+                resultadoDois.append(`<br>personalizado: ${personalizado}`)
+        }
+
+        $('#div1, #div2').on('mouseenter mouseleave',
+            { personalizado: 'Olá! :)' }, exibirDadosEventos)
+        $('input').keyup(exibirDadosEventos)
+    </script>
+</body>
+</html>

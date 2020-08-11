@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Eventos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+  </head>
+  <body class="exercicio">
+    <div id="app">
+      <p>
+        <input type="text" size="6" :value="contador">
+        <!-- Usando diretiva responsável por associar métodos de eventos de
+        elementos aos métodos do Vue -->
+        <button v-on:click="add">+1</button>
+        <!-- Usando v-on reduzido e usando expressão direta -->
+        <button @click="contador *= 2">x2</button>
+        <!-- Usando v-on reduzido e usando método -->
+        <button @click="clear">Clear</button>
+      </p>
+      <hr>
+      <!-- Usando outro evento -->
+      <p @mousemove="atualizarPosicao">
+        Posição: {{ x }} e {{ y }}<br>
+        <small style="color: red">Aqui COM coordenadas</small><br>
+        <!-- Usando métodos nativos do Vue para eventos -->
+        <small @mousemove.stop>Aqui SEM coordenadas</small><br>
+        <!-- Ou usando um método manualmente -->
+        <small @mousemove="stop">Aqui também SEM</small>
+      </p>
+      <hr>
+      <p>
+        <!-- Adicionando evento para captura de teclas específicas -->
+        <input type="text" @keyup.enter="alerta" placeholder="Pressione ENTER...">
+      </p>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          contador: 0,
+          x: 0,
+          y: 0
+        },
+        methods: {
+          add() {
+            this.contador++
+          },     
+          clear() {
+            this.contador = 0
+          },
+          atualizarPosicao(e) {
+            this.x = e.clientX
+            this.y = e.clientY
+          },
+          stop(e) {
+            e.stopPropagation()
+          },
+          alerta() {
+            alert('Enter!')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

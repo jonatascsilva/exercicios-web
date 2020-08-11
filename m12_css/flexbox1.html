@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox #01</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+        .big {
+            font-size: 1.5em;
+        }
+
+        /* Flex
+            https://origamid.com/projetos/flexbox-guia-completo/
+            https://flexboxfroggy.com/
+
+            > É unidimensional (somente um eixo principal, chamado de main, e o eixo transversal é o cross)
+            > Quando se define um container com flex, todos os seus filhos serão flex-items
+            > Main e cross possuem start e end
+        */
+
+        /* Será abordado:
+            > Flex-direction
+            > Flex-wrap
+            > Flex-flow
+            > Justify-content
+            > Align-items
+            > Align-content
+        */
+        .flex-container {
+            /*
+                Define o elemento como um flex container, tornando os seus filhos flex-itens.
+            */
+            display: flex;
+
+            /*
+                    Define a direção dos flex itens. Por padrão ele é row (linha),
+                por isso quando o display: flex; é adicionado, os elementos
+                ficam em linha, um do lado do outro.
+                    A mudança de row para column geralmente acontece quando estamos
+                definindo os estilos em media queries para o mobile. Assim você
+                garante que o conteúdo seja apresentado em coluna única.
+            */
+            flex-direction: column;                 /* Defino o main axis para coluna */
+            flex-direction: column-reverse;         /* Inverto a ordem dos componentes */
+            flex-direction: row-reverse;
+            flex-direction: row;
+
+            /*
+                    Define se os itens devem quebrar ou não a linha. Por padrão eles não
+                quebram linha, isso faz com que os flex itens sejam compactados além
+                do limite do conteúdo.
+                    Essa é geralmente uma propriedade que é quase sempre definida como
+                flex-wrap: wrap; Pois assim quando um dos flex itens atinge o limite do
+                conteúdo, o último item passa para a coluna debaixo e assim por diante.
+            */
+            width: 50%;
+            flex-wrap: wrap;                        /* Se der overflow, aplica quebra de linha */
+            flex-wrap: wrap-reverse;                /* Inverte a ordem das linhas (e não do conteúdo!) */
+            
+            /*
+                O flex-flow é um atalho para as propriedades flex-direction e flex-wrap.
+            */
+            height: 200px;
+            flex-flow: column-reverse wrap;         /* Apenas uma propriedade shrort hand para tratar direction e wrap */
+            flex-flow: row wrap;                    
+
+            /* Alinhando flex-items com main-Axis */
+            /*
+                    Alinha os itens flex no container de acordo com a direção. A propriedade
+                só funciona se os itens atuais não ocuparem todo o container. Isso significa
+                que ao definir flex: 1; ou algo similar nos itens, a propriedade não terá mais
+                função.
+                    Excelente propriedade para ser usada em casos que você deseja alinhar um
+                item na ponta esquerda e outro na direita, como em um simples header com marca
+                e navegação.
+            */
+            justify-content: flex-start;            /* Justifica os flex-item pelo conteúdo, alinhando no start do main-axis do flex-container (nesse caso na esquerda) */
+            justify-content: flex-end;              /* Alinha flex-items no end do main-axis (nesse caso, é como um float right) */
+            justify-content: center;                /* Alinha flex-items no centro do main-axis */
+            justify-content: space-around;          /* Alinha flex-items ao longo do main-axis com margens de igual tamanho (colocando margem antes e depois inclusive do primeiro e último flex-item) */
+            justify-content: space-between;         /* Alinha flex-items ao longo do main-axis com margens de igual tamanho (não coloca margem antes e depois do primeiro e último flex-item) */
+
+            /* Alinhando flex-items em Cross-Axis */
+            /*
+                    O align-items alinha os flex itens de acordo com o eixo do container.
+                O alinhamento é diferente para quando os itens estão em colunas ou linhas.
+                    Essa propriedade permite o tão sonhado alinhamento central no eixo
+                vertical, algo que antes só era possível com diferentes hacks.
+            */
+            height: 400px;
+            align-items: stretch;                   /* Valor padrão, o tamanho dos flex-items irão esticar até ocupar todo o cross-axis */
+            align-items: baseline;                  /* O conteúdo do flex-item se limita ao seu conteúdo, e o alinhamento no main-axis se dará pela linha de base (bottom) do conteúdo dos flex-items */
+            align-items: flex-start;                /* O conteúdo do flex-item se limita ao seu conteúdo, alinha os flex-items no start da cross-axis */
+            align-items: flex-end;                  /* O conteúdo do flex-item se limita ao seu conteúdo, alinha os flex-items no end da cross-axis */
+            align-items: center;                    /* O conteúdo do flex-item se limita ao seu conteúdo, alinha os flex-items no meio da cross-axis */
+
+            /* Alinhando linhas de flex-items com Cross-Axis quando temos mais de uma linha (quando houve quebra de linha) */
+            /* A diferença se dá, em relação ao align-items, que agora estou mexendo em cada linha em que houve quebra de linha, e não nos elementos dessas linhas */
+            /*
+                    Alinha as linhas do container em relação ao eixo vertical. A propriedade
+                só funciona se existir mais de uma linha de flex-itens. Para isso o flex-wrap
+                precisa ser wrap.
+                    Além disso o efeito dela apenas será visualizado caso o container seja
+                maior que a soma das linhas dos itens. Isso significa que se você não definir
+                height para o container, a propriedade não influencia no layout.
+            */
+            align-content: center;                
+            align-content: flex-start;
+            align-content: flex-end;                  
+            align-content: space-between;
+            align-content: space-around;                      
+            align-content: stretch;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container tag nolabel">
+        <div class="tag nolabel">1</div>
+        <div class="tag nolabel">2</div>
+        <div class="tag nolabel big">3</div>
+        <div class="tag nolabel">4</div>
+        <div class="tag nolabel">5</div>
+        <div class="tag nolabel">6</div>
+        <div class="tag nolabel">7</div>
+        <div class="tag nolabel">8</div>
+        <div class="tag nolabel">9</div>
+        <div class="tag nolabel">10</div>
+        <div class="tag nolabel">10</div>
+    </div>
+    <script src="js/tag.js"></script>
+</body>
+
+</html>

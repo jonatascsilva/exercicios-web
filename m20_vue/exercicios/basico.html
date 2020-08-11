@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Conceitos Básicos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+  </head>
+  <body class="exercicio">
+    <!-- Defino um template do Vue, definindo um elemento HTML com a id que será
+    declarada -->
+    <div id="app">
+      <!-- Usa-se o JavaScript Templating para colocar expressões -->
+      <p>1) {{ 2 + 2 }}</p>
+      <p>2) {{ "teste".toUpperCase() }}</p>
+      <!-- Usando o atributo data do Vue -->
+      <p>3) Produto: {{ nome }}, R$ {{ preco.toString().replace('.', ',') }} / {{ desconto *
+        100}}%</p>
+      <!-- Usando o método do Vue -->
+      <p>4) Hora certa: {{ horaCerta() }}</p>
+      <!-- Usando o computed do Vue -->
+      <p>5) Caneta com desconto: R$ {{ precoComDesconto }}</p>
+    </div>
+    <script>
+      // Crio instância do Vue e associo ele ao template do meu HTML que ele irá
+      // controlar, definindo os atributos:
+      // - el: Elemento HTML
+      // - data: Define os dados que deseja estar disponível na app
+      // - methods: Define métodos para serem usados na app
+      // - computed: Defino valores já calculados em cima dos dados existentes
+      new Vue({
+        el: "#app",
+        data: {
+          nome: 'Caneta',
+          preco: 6.89,
+          desconto: 0.15
+        },
+        methods: {
+          horaCerta() {
+            return new Date().toLocaleString()
+          }
+        },
+        computed: {
+          precoComDesconto() {
+            return (this.preco * (1 - this.desconto)).toFixed(2).toString().replace('.', ',')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

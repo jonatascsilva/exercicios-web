@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>Elemento</div>
+    <script>
+        // Arrastando elementos
+
+        const item = document.querySelector('div')  // Obtenho a div
+        item.style.position = 'absolute'            // Posicionando a div de forma absoluta com coordenadas X/Y
+
+        item.onmousemove = e => {       // Quando o mouse mover sobre a div, disparo um evento (evento contém info sobre o mouse)...
+            const item = e.target
+            item.style.cursor = 'move'  // Defino o estilo do cursor do mouse para "mover"
+            
+            // Se um dos botões do mouse foi pressionado/clicado muda para true
+            if (e.buttons) {
+                // 1. O target é a própria div (ela quem disparou o evento)
+                // 2. Defino uma nova posição em relação ao topo da div
+                // 3. Atribuo o valor da posição do cursor do mouse
+                    // Referência: https://javascript.info/coordinates
+                    // 3.1 e.clientY indica a posição no eixo Y em que o cursor do mouse está
+                    // 3.2 item.clienHeight indica a altura total da div
+                // 4. Logo, centralizamos a div no cursor do mouse
+                item.style.top = `${e.clientY - (item.clientHeight / 2)}px`
+                item.style.left = `${e.clientX - (item.clientWidth / 2)}px`
+            }
+        }
+    </script>
+</body>

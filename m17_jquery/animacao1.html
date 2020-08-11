@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Animação #01</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+    <style>
+        div {
+            text-align: center;
+        }
+        button {
+            font-size: 1.8em;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Animação #01</h1>
+    <button>Iniciar</button>
+    <div id="animar">Animar!</div>
+
+    <script>        
+        // Usando animações embutidas
+
+        $('button').click(e => {
+            const tempoMs = 450
+
+            // Hide/Show:
+            // - Reduz tamanho e opacidade do elemento
+            // - Finalmente aplica display: none
+            // $('#animar').hide(tempoMs).show(tempoMs)
+
+            // Toggle:
+            // - Muda estado de show <> hide
+            // $('#animar').toggle(tempoMs).toggle(tempoMs)
+
+            // Fade:
+            // - Diminui opacidade
+            // - Finalmente aplica display: none
+            // $('#animar').fadeOut(tempoMs).fadeIn(tempoMs)
+
+            // FadeToggle:
+            // - Muda estado de fadeIn <> fadeOut
+            // $('#animar').fadeToggle(tempoMs).fadeToggle(tempoMs)
+
+            // Slide:
+            // - Reduz altura, padding e margem superior/inferior
+            // - Finalmente aplica display: none
+            // $('#animar').slideUp(tempoMs).slideDown(tempoMs)
+
+            // SlideToggle:
+            // - Muda estado de slideUp <> slideDown
+            $('#animar').slideToggle(tempoMs).slideToggle(tempoMs)
+        })
+    </script>
+</body>
+</html>

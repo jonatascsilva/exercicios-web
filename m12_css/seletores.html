@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Selectors</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+        /* Seletores no CSS:
+            > *                     Todo e qualquer elemento da página
+            > elemento              Elementos de um html (h1, h2, etc.)
+            > .class                Elementos que estiverem com a label dessa classe (class="blabla")
+            > #id                   Elementos que estiver com o id especificado
+            > [atributos]           Todos os elementos que estiverem com este atributo 
+                                      (que pode ter sido criado por você, como: jonatas-hide='true'
+                                      geralmente é usado para ser tratado no JS, pois classe é mais performática
+            > [atributos=valor]     Todos os elementos que estiverem com este atributo e com este valor
+            > [atributos~=valor]    "                                                " e que comecem exatamente com este valor
+            > [atributos*=valor]    "                                                " e que contenham este valor em qualquer posição
+            > elemento.classe       Obtenho um elemento que tenha essa classe
+            > elemento#id           Obtenho um elemento que tenha esse id
+            > elemento[atributo]    Obtenho um elemento que tenha esse atributo
+            > :pseudo-class         Somente com um filtro ou um determinado evento no elemento (como hover, click, etc.)
+            > ::pseudo-elem         Somente num determinado conteúdo do elemento (primeira letra, quando há erro de gramática, etc.)
+        */
+
+        /* Combinando seletores
+            Pode ser aplicado à qualquer seletor, mas será usado como exemplo uma tag div e uma tag p
+            > div + p       Obtém p próximo e ADJACENTE ao div dentro de um mesmo pai (de uma raíz)
+            > div ~ p       Obtém p's que sejam "irmãos" de div (ou seja, não necessariamente adjacentes) dentro de um mesmo pai
+            > div > p       Aplica ao p's filhos direto de div (está dentro de div, exemplo div > p)   
+            > div p         Qualquer p filhos descendentes de div (por exemplo, div > div > p, logo, esse p será obtido)
+            > div, p        Obtém qualquer div e qualquer p do documento, será aplicado CSS nas duas (útil quando os dois elementos terão as mesmas propriedades)
+        */
+
+        /* Testes
+
+        {
+            color: #ff0;
+            background-color: #f77;
+        }
+        
+        .tag {
+            color: #ff0;
+            background-color: #f77;
+        }
+        
+        #aninhado {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        #aninhado > div {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        #aninhado > section {   Não funciona, pois não é filho direto
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        #aninhado section {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        p + ul {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        p ~ ol {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        [feira] {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        [feira=casa] {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        [feira~=escritorio] {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        [feira*=cri] {
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        span:nth-child(2) {             Tag span que seja filha de alguém e que seja o segundo filho (segunda posição) de qualquer elemento
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        section > :nth-child(odd) {     Filhos de section que estejam nas posições impares
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        section > :nth-child(even) {     Filhos de section que estejam nas posições pares
+            color: #ff0;
+            background-color: #f77;
+        } 
+
+        section > :nth-child(even) label {  Labels dos filhos de section que estejam nas posições pares
+            color: #ff0;
+            background-color: #f77;
+        } */
+
+        section > span:nth-of-type(2) {     /* Segundo elemento span filho de uma section */
+            color: #ff0;
+            background-color: #f77;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='tag'>
+        <div class='tag'>
+            <p class='tag'>1</p>
+            <ul class='tag' feira='casa'>
+                <li>Arroz</li>
+                <li>Feijão</li>
+            </ul>
+            <ul class='tag' feira='escritorio empresa'>
+                <li>Café</li>
+                <li>Água</li>
+            </ul>
+            <ol id='aprovados' class='tag'>
+                <li>Maria</li>
+                <li>Pedro</li>
+                <li>Ana</li>
+            </ol>
+            <div id='aninhado' class='tag'>
+                <div class="tag">
+                    <section class='tag'>
+                        <span class='tag'>1</span>
+                        <p class='tag'>2</p>
+                        <span class='tag'>3</span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/tag.js"></script>
+</body>
+
+</html>

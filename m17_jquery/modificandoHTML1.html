@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modificando HTML #01</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Modificando HTML #01</h1>
+    <div id="conteudo1"></div>
+    <div id="conteudo2"></div>
+    <div id="conteudo3"></div>
+    <div>Sem ID!</div>
+
+    <script>
+        // Conteúdo 1: Criando novo elemento p e associando com append
+        $('#conteudo1').append('<p>1</p>')
+
+        // Conteúdo 2: Criando array de novos elementos
+        const elementos = [
+            $('<li></li>').append('Arroz'), // Pode criar fechando tag
+            $('<li>').append('Feijão'),     // ou não, é opcional
+            $('<li>').append('Carne')
+        ]
+
+            // Observe que prepend associa novos elementos antes do(s) já existente(s)
+        const lista = $('<ul><li>Sorvete</li></ul>').prepend(elementos)
+        $('#conteudo2').append(lista)
+
+        // Conteúdo 3: Brincando com a lógico do append/prepend
+        $('#conteudo3').append('<h1>1</h1>', '<h1>2</h1>').prepend('<h1>0</h1>')
+        
+            // Substituindo conteúdo HTML de um elemento, semelhante ao innerHTML
+        $('#conteudo3').html('<h1>123</h1>')
+
+            // Inserindo conteúdo textual em um elemento (como uma string)
+        $('#conteudo3').text('<h1>123</h1>')
+
+            // Alterando HTML de vários elementos
+        $('div[id]').html('<strong>Todos!</strong>')
+    </script>
+</body>
+</html>

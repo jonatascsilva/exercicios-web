@@ -1,0 +1,161 @@
+<h1>Imagens</h1>
+<hr>
+<section>Execute este arquivo diretamente por sua URL para executar o script dele.</section>
+
+<div id="wm-slider">
+    <!-- Imagens
+        > src: Fonte da imagem alt: Usado para leitores cegos ou exibido para
+        > quando a imagem não puder ser carregada title: Exibe o título da
+        > imagem quando o mouse estiver sobre ela -->
+    <p>
+        <img src="//files.cod3r.com.br/curso-web/imagem1.jpg"
+            alt="Muro da Cidade"
+            height="342"
+            title="Muro da Cidade por Tarso Bessa" />
+    </p>
+    <p>
+        <img src="//files.cod3r.com.br/curso-web/imagem2.gif"
+            alt="Intro Cod3r"
+            height="342"
+            title="Introdução da escola Cod3r" />
+    </p>
+    <p class="fundoCinza">
+        <img src="//files.cod3r.com.br/curso-web/imagem3.png"
+            alt="Rio de Janeiro"
+            height="342"
+            title="Rio de Janeiro" />
+    </p>
+    <p class="texto">
+        <img src="//files.cod3r.com.br/curso-web/avatar.jpg"
+            alt="Rio de Janeiro"
+            height="50"
+            title="Rio de Janeiro"
+            align="left" />
+            Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis
+            nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore
+            eu fugiat nulla pariatur.
+    </p>
+    <p class="cidade"></p>
+    <p>
+        <picture><!-- Usando a tag picture posso definir alguns critérios -->
+            <!-- Só será exibido a img se a largura do dispositivo for maior que
+                600px, então se for menor, coloca a imagem "reservas" das linhas
+                de baixo -->
+            <source srcset="//files.cod3r.com.br/curso-web/logo-larga.png"
+                media="(min-width: 600px)"
+                alt="Logo">
+            <img src="//files.cod3r.com.br/curso-web/logo-estreita.png" alt="Logo">
+        </picture>
+    </p>
+</div>
+
+<button id="btn-exib" onclick="exibirImgs()">Exibir imagens!</button> |
+<button id="btn-mov" onclick="movimentarImgs()" disabled>Movimentar!</button> |
+<button id="btn-cancelarmov" onclick="cancelarMovimento()" disabled>Cancelar Movimento!</button>
+
+<style>
+    #wm-slider {
+        position: relative;
+        overflow-x: hidden;
+        width: 700px;
+        height: 400px;
+    }
+
+    p {
+        display: none;
+        position: absolute;
+    }
+
+    .fundoCinza {
+        width: 513px;
+        background-color: #444;
+    }
+
+    .texto {
+        width: 513px;
+    }
+
+    .texto img {
+        margin: 10px;
+    }
+
+    .cidade {
+        width: 513px;
+        height: 342px;
+        background-image: url("//files.cod3r.com.br/curso-web/imagem4.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 200%;
+    }
+</style>
+
+<script>
+    // Abaixo está a minha solução, ver a do professor no repositório do github
+
+    const slider = document.getElementById("wm-slider")
+    const imagens = slider.querySelectorAll("p")
+
+    const posicaoLateralDireitaDiv = slider.getBoundingClientRect().right
+    const posicaoLateralEsquerdaDiv = slider.getBoundingClientRect().left
+
+    let scrollMaximo = 0;
+
+    function exibirImgs() {
+        const margem = 30;
+        let posicao = posicaoLateralEsquerdaDiv;
+
+        for (let i = 0; i < imagens.length; i++) {
+            imagens[i].style.display = 'block'
+            imagens[i].style.left = posicao + "px"
+            posicao = imagens[i].getBoundingClientRect().right + margem
+            scrollMaximo += posicao
+        }
+
+        document.getElementById("btn-exib").disabled = true;
+        document.getElementById("btn-exib").style.display = "inline-block";
+        document.getElementById("btn-exib").style.opacity = "0.4";
+
+        document.getElementById("btn-mov").disabled = false;
+        document.getElementById("btn-cancelarmov").disabled = false;
+    }
+
+    let scrollEsquerda = true;
+    let cancelarMovimentacao = false;
+
+    function movimentarImgs() {
+        let posicao = posicaoLateralEsquerdaDiv;
+        let valorSliderAnterior = -1;
+
+        const iniciaMovimento = setInterval(iniciarScroll, 50);
+        
+        function iniciarScroll() {
+            if ((scrollEsquerda === true) && (cancelarMovimentacao === false)) {
+                if (slider.scrollLeft == valorSliderAnterior) {
+                    scrollEsquerda = false;
+                    posicao = posicaoLateralEsquerdaDiv;
+                } else {
+                    posicao++;
+                    valorSliderAnterior = slider.scrollLeft;
+                    slider.scrollLeft += posicao;
+                }
+            } else if ((scrollEsquerda === false) && (cancelarMovimentacao === false)) {
+                if (slider.scrollLeft == 0) {
+                    scrollEsquerda = true;
+                } else {
+                    slider.scrollLeft -= 150;
+                }
+            } else {
+                clearInterval(iniciaMovimento)
+                cancelarMovimentacao = false
+            }
+        }
+    }
+
+    function cancelarMovimento() {
+        cancelarMovimentacao = true
+    }
+</script>

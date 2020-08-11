@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<!--    
+
+    Link útil: https://validator.w3.org/nu/
+    
+        Esse HTML será um indexador para os exercícios que estão dentro da pasta
+    exercícios. A ideia é ter uma pagina de índice/sumário linkando todos os
+    exercícios feitos e quando clicar sobre um exercicio, o conteudo dele seja
+    exibido nesta mesma, ou seja, não vai abrir uma nova página html
+
+        Será executado utilizando a biblioteca http-server (basta abrir esta
+    pasta no console e executar o comando "http-server ." no console). Ou caso a
+    porta esteja ocupada, execute em outra porta "http-server -p 9090 .", depois
+    basta colocar no browser "localhost:8080" sendo 8080 a porta iniciada.
+
+        Como será atualizado constantemente os arquivos e não queremos que seja
+    salvo em cache os elementos das paginas dos exercícios, devemos iniciar o
+    servidor desativando o cache com o comando "http-server -c-1 ." --->
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios HTML</title>
+    <style>
+        #conteudo {
+            padding: 30px 0px;  /* cima/baixo = 30 & esq/dir = 0 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exercícios HTML</h1>
+    </header>
+    <nav>
+        <!-- Veja que o conteudo destes arquivos nao possuem tags html, para
+        assim ser possível fazer a requisição AJAX e serem exibidos aqui neste
+        HTML -->
+        <a href wm-nav="exercicios/texto1.html">[01] Texto - Parte 1</a>
+        | <a href wm-nav="exercicios/texto2.html">[02] Texto - Parte 2</a>
+        | <a href wm-nav="exercicios/listas.html">[03] Listas</a>
+        | <a href wm-nav="exercicios/listasAninhadas.html">[04] Listas Aninhadas</a>
+        | <a href wm-nav="exercicios/links.html">[05] Links</a>
+        | <a href wm-nav="exercicios/tabelas.html">[06] Tabelas</a>
+        | <a href wm-nav="exercicios/form/form.html">[07] Formulário</a>
+        | <a href wm-nav="exercicios/imagens.html">[08] Imagens</a>
+        | <a href wm-nav="exercicios/videos.html">[09] Vídeos</a>
+        | <a href wm-nav="exercicios/tagsNaoVisuais.html">[10] Não Visuais</a>
+    </nav>
+    <!-- Aqui conterá o conteúdo "copiado" pela requisição do script JS
+    (requisição AJAX) -->
+    <section id="conteudo"></section>
+    <footer>
+        <br />
+        Curso de Web Moderno
+    </footer>
+    <script>
+        document.querySelectorAll('[wm-nav]').forEach(link => {    // Para cada tag que contenha o atributo personalizado wm-nav em meu documento HTML, associo o seguinte script:
+            const conteudo = document.getElementById('conteudo')   // Aponto a tag section que tem o id "conteudo" para a variável "conteudo"
+            
+            link.onclick = function (event) {                   // Quando clicar em qualquer tag a
+                event.preventDefault()                          // Previne que o comportamento padrão ocorra (que seria, quando clicar, abrir uma nova página HTML da referência da tag a clicada)
+
+                fetch(link.getAttribute('wm-nav'))              // Faço uma requisição AJAX em cima do link/arquivo referenciado no valor do atributo wm-nav da tag do forEach atual
+                    .then(resp => resp.text())                  // Quando a promise do AJAX responder, obtenho o conteúdo HTML do body desse html usando o método text()
+                    .then(html => conteudo.innerHTML = html)    // Atribuo o HTML recebido da requisição AJAX para o conteúdo/corpo da tag section conteudo (que é para onde a variável "conteudo" aponta)
+            }
+        })
+
+        // No código abaixo é buscado os HTMLs pelo href
+        /* document.querySelectorAll('a').forEach(link => {    // Para cada tag a existente em meu documento HTML, associo o seguinte script:
+            const conteudo = document.getElementById('conteudo')    // Aponto a tag section que tem o id "conteudo" para a variável "conteudo"
+            
+            link.onclick = function (event) {                   // Quando clicar em qualquer tag a
+                event.preventDefault()                          // Previne que o comportamento padrão ocorra (que seria, quando clicar, abrir uma nova página HTML da referência da tag a clicada)
+
+                fetch(link.href)                                // Faço uma requisição AJAX em cima do link/arquivo referenciado no parametro href da tag a
+                    .then(resp => resp.text())                  // Quando a promise do AJAX responder, obtenho o conteúdo HTML do body desse html usando o método text()
+                    .then(html => conteudo.innerHTML = html)    // Atribuo o HTML recebido da requisição AJAX para o conteúdo/corpo da tag section conteudo (que é para onde a variável "conteudo" aponta)
+            }
+        }) */
+    </script>
+</body>
+</html>

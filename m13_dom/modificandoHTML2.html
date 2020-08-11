@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <p>Texto Inicial</p>
+    </div>
+    <script>
+        // Modificando o HTML de elementos
+            const div = document.querySelector('div')
+            div.innerHTML = 'P removida'                                            // Observe que tudo o que existir dentro da div será excluído, inclusive o elemento p com seu texto, não é uma abordagem tão interessante nesse caso
+            // div.outerHTML = 'Div removida'                                       // Aqui exclui o elemento selecionado e substitui pelo texto
+            div.insertAdjacentHTML('beforebegin', '<p>Antes do início da div</p>')  // Antes da tag <div>, coloque o elemento p com o texto digitado
+            div.insertAdjacentHTML('afterbegin', '<p>Depois do início da div</p>')  // Depois da tag <div>, coloque o elemento p com o texto digitado (ficará dentro da div, antes de qualquer coisa)
+            div.insertAdjacentHTML('beforeend', '<p>Antes do fim da div</p>')       // Antes da tag </div>, coloque o elemento p com o texto digitado (ficará dentro da div, após qualquer coisa)
+
+        // Modificando somente o texto de elementos
+            console.log(div.innerHTML)  // Retorna tudo o que estiver dentro da div (inclusive os elementos (<div>, <p>, ...))
+            console.log(div.innerText)  // Retorna somente os textos dentro da div
+    </script>
+</body>
+
+</html>

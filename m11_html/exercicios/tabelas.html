@@ -1,0 +1,59 @@
+<h1>Tabelas</h1>
+<hr>
+
+<!-- Tabelas -->
+<table>
+    <caption>Produtos</caption> <!-- Título de uma tabela -->
+    <thead>                     <!-- Área para conter o cabeçalho da tabela -->
+        <tr>                    <!-- Indica linha de cabeçalhos -->
+            <th>Produto</th>    <!-- Primeira coluna do cabeçalho da tabela -->
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>                     <!-- Conteúdo da tabela -->
+        <tr>                    <!-- Indica primeira linha de dados -->
+            <td>Apple iPad</td> <!-- Dado da primeira linha da primeira coluna (ref. ao cabeçalho) -->    
+            <td>3289,00</td>    <!-- Dado da segunda linha da segunda coluna (ref. ao cabeçalho) -->    
+            <td>5</td>
+            <td>16445,00</td>
+        </tr>
+        <tr>                    <!-- Indica segunda linha de dados -->
+            <td>Samsung S9</td>
+            <td>2649,00</td>
+            <td>8</td>
+            <td>21192,00</td>
+        </tr>
+    </tbody>
+    <tfoot>                     <!-- Área para conter o rodapé da tabela -->
+        <tr>                    <!-- Indica linha de rodapé -->
+            <td colspan="3">Total</td>  <!-- Total ocupa três colunas da tabela, posso ocupar até linhas usando o rowspan="" -->
+            <td>37637,00</td>
+        </tr>
+    </tfoot>
+</table>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    thead tr {                              /* Aplico borda na parte inferior em todas as linhas (tag TR) que estiverem dentro de THEAD */
+        border-bottom: solid 3px #444;  
+    }
+
+    tbody tr:hover {                        /* Aplico cor de fundo enquanto o mouse estiver sobre a linha (com TR) dentro de um TBODY */
+        background-color: #dedede;
+    }  
+
+    tfoot {
+        background-color: #444;
+        color: #fff;
+        font-weight: bold;
+    }
+</style>

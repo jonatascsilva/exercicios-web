@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Um Pouco De CSS</title>
+        <link rel="stylesheet" href="poucoDeCss.css">
+        <style>
+            /* No corpo da tag style coloco meu código CSS, mas o ideal é separar o CSS em um outro arquivo e referenciar, como fiz na linha acima */
+            h1 {                    /* Defino estilo para todas as tags h1 */
+                font-size: 72px;
+            }
+
+            .fundoVermelho {        /* Crio uma nova classe CSS, começando por . */
+                background-color: #f00; /* f00 == ff0000 => Se o número é repetido dentro de uma cor, posso remover */
+            }
+
+            .negrito {
+                font-weight: bold;
+            }
+
+            .italico {
+                font-style: italic;
+            }
+
+            /* Crio um novo estilo para um id específico usando #, ver arquivo poucoDeCss.css */
+        </style>
+    </head>
+    <body>
+        <h1>CSS</h1>
+        <!--   Span é uma tag genérica e sem função específica, geralmente -->
+        <!-- usada para aplicar estilo sem precisa de uma tag padrão.      -->
+        <span id="textoPrincipal">Texto 1</span><br><br>            <!-- O id é opcional e existe em todas as tags, é usado para distinguir uma tag, logo ela será única! -->
+        <span class="fundoVermelho negrito">Texto 2</span><br><br>  <!-- O uso de classes (no caso apliquei duas: fundoVermelho e negrito) é para aplicar estilos em tags diversas -->
+        <span class="fundoVermelho italico">Texto 3</span><br><br>
+        <span style="display: none;">Texto 4</span>          <!-- Posso colocar o CSS direto na tag, apesar de naõ ser o recomendado -->  
+    </body>
+</html>

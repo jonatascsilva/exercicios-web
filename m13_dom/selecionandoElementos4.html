@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #04</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <p>Início</p>
+    </div>
+    <div>
+        <ul>
+            <li>Pedro</li>
+            <li>Ana</li>
+            <li>Bia</li>
+        </ul>
+    </div>
+    <div>
+        <p>Fim</p>
+    </div>
+    <script>
+        // Prototipando uma abreviação do console.log na minha página
+        function log() {
+            console.log(this)
+        }
+
+        HTMLCollection.prototype.log = log
+        HTMLElement.prototype.log = log
+        NodeList.prototype.log = log
+        Node.prototype.log = log
+
+        const lista = document.querySelector('div ul')
+
+        // 1. Selecionando elemento pai
+        lista.parentNode.log()              // Como só é possível ter um pai, retorna um único elemento
+
+        // 2. Selecionando elementos filhos com childNodes
+        lista.childNodes.log()              // Como é possível ter vários filhos, retorna NodeList com todos os filhos
+                                            // Observe que ele exibe até os breaklines (exibindo como texts)
+
+            // 2.1 Selecionando elementos filhos específicos
+            const primeiroFilho = lista.firstChild
+            primeiroFilho.log()                 // Exibe primeiro elem. filho
+            primeiroFilho.nextSibling.log()     // Exibe o próximo elemento irmão (que esteja na mesma árvore) do primeiro elem. filho
+
+            const ultimoFilho = lista.lastChild
+            ultimoFilho.log()                   // Exibe ultimo elem. filho
+            ultimoFilho.previousSibling.log()   // Exibe o elemento irmão anterior (que esteja na mesma árvore) do ultimo elem. filho
+
+        // 3. Selecionando elementos filhos com children
+        lista.children.log()                // Retorna HTMLCollection com todos os filhos
+                                            // Observe que não exibe os breaklines
+
+            // 3.1 Selecionando elementos filhos específicos
+            lista.firstElementChild.log()       // Exibe primeiro elem. filho
+            lista.lastElementChild.log()        // Exibe ultimo elem. filho
+
+            // 3.2 Misturando métodos
+            lista.parentNode.previousElementSibling.log()   // Pega o elemento pai de ul (div) e obtém o elem. irmão anterior à ela (div que contém p Início)
+            lista.parentNode.nextElementSibling.log()       // Pega o elemento pai de ul (div) e obtém o elem. irmão posterior à ela (div que contém p Fim)
+        
+        // 4. Obtendo filho mais específico com querySelectorAll
+        document.querySelectorAll('div ul li').log()        // Obtendo todas li dentro de uma ul e que esta esteja dentro de uma div
+    </script>
+</body>
+
+</html>

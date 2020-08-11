@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modificando HTML #02</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Modificando HTML #02</h1>
+    <div id="div1">1</div>
+    <div id="div2">2</div>
+    <div id="div3">3</div>
+    <p class="numero">4</p>
+    <p class="numero">5</p>
+
+    <script>
+        // Inserção de elementos dentro de um elemento
+
+            // Usando append e prepend
+            $('#div1').append(', 2')
+            $('#div1').prepend('0, ')
+
+            // Usando appendTo e prependTo
+            // Nesse caso, é importante definir o tipo do elemento à ser inserido
+            $('<span>, 3</span>').appendTo('#div1')
+            $('<span>-1, </span>').prependTo('#div1')
+
+
+        // Inserção de elementos externos à um elemento
+
+            // Usando before e after
+            $('#div2').before('<p>Antes 2</p>')
+            $('#div2').after('<p>Depois 2</p>')
+
+            // Usando insertBefore e insertAfter
+            $('<p>Antes 3</p>').insertBefore('#div3')
+            $('<p>Depois 3</p>').insertAfter('#div3')
+
+
+        // Envolvendo elemento(s) dentro de um elemento pai
+
+            // Usando wrap
+            // - Envolve cada elemento encontrado com o elemento pai declarado
+            // $('p.numero').wrap('<div>')
+
+            // Usando wrapAll
+            // - Envolve todos os elementos encontrados com o elemento pai
+            //   declarado
+            // - Observe que posso criar atributos durante a declaração
+            $('p.numero').wrapAll('<div id="div4">')
+            
+
+        // Limpando/removendo elementos
+            
+            // Limpando o conteúdo HTML de um elemento
+            $('#div4').empty()
+            
+            // Removendo/excluindo um elemento
+            // - No caso, estou removendo o elemento anterior à div3 e o
+            //   elemento anterior à div4
+            $('#div3, #div4').prev().remove()
+
+            
+        // Substituindo elementos
+
+            // Usando replaceAll
+            // - Substituo todos os filhos diretos de body por um elemento
+            // $('<div>Substituo</div>').replaceAll('body > p')
+
+            // Usando replaceAll
+            // - Substituo todos os filhos diretos de body por um elemento
+            // $('body > p').replaceWith('<div>Substituo</div>')
+            
+            // - Usando função callback
+            $('body > p').replaceWith(function() {
+                // Pegando o conteúdo HTML do elemento atual e colocando dentro
+                // do novo elemento que irá substituí-lo, adicionando novo um
+                // conteúdo
+                return $('<div>').html($(this).html()).append(' !!!')
+            })
+    </script>
+</body>
+</html>

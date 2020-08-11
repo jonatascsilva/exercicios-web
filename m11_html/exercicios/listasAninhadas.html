@@ -1,0 +1,58 @@
+<h1>Listas Aninhadas</h1>
+<hr>
+<p>Execute este arquivo diretamente por sua URL para executar o script dele.</p>
+
+<!-- A ideia é mostrar as pastas e arquivos de um projeto, como um file explorer
+    sendo assim, ao clicar nas "pastas", ele expandi/contrai as subpastas -->
+
+<h1>Projeto</h1>
+<ul class="tree"><!-- Defino a lista com a classe "tree" e assim obtenho o estilo para essa lista do CSS da Cod3r -->
+    <li>
+        <span nome-pasta>backend</span>
+        <ul>
+            <li>
+                <span nome-pasta>app</span>
+                <ul>
+                    <li>produto.js</li>
+                    <li>usuario.js</li>
+                    <li>venda.js</li>
+                </ul>
+            </li>
+            <li>
+                <span nome-pasta>config</span>
+                <ul>
+                    <li>banco.js</li>
+                    <li>rotas.js</li>
+                    <li>servidor.js</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <span nome-pasta>frontend</span>
+        <ul>
+            <li>
+                <span nome-pasta>public</span>
+                <ul>
+                    <li>app.css</li>
+                    <li>app.js</li>
+                    <li>index.html</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!-- "Importo" o link do CSS da Cod3r, que aplica uma imitação de uma "árvore -->
+<link rel="stylesheet" href="http://files.cod3r.com.br/curso-web/tree.css">
+
+<script>
+    document.querySelectorAll('[nome-pasta]').forEach((pasta) => {          
+        pasta.onclick = function (event) {
+            // debugger                                                                   // Caso queira fazer debug no browser
+            const ulObtida = pasta.nextElementSibling                                     // Obtem o próximo elemento da span clicada
+            const displayUlAnterior = ulObtida.style.display                              // Salvo o ultimo estado do display atual da ul
+            ulObtida.style.display = (displayUlAnterior === 'none' ? 'block' : 'none')    // Atribuo uma operação ternária no display: Se o valor salvo de display anteriormente for igual a none (invisivel), altera para block (visivel), caso contrário, 
+        }
+    })
+</script>

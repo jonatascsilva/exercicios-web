@@ -1,0 +1,8 @@
+.Main {
+  max-width: 100vw;
+}
+
+.Main > div {
+  background-color: #fff;
+  box-shadow: var(--shadow-main);
+}

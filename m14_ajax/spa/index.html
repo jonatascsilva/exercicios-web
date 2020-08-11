@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Mini SPA</title>
+    <link rel='stylesheet' href='../css/estilo.css'>
+    <style>
+        nav {
+            font-size: 2em;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #FFF;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+
+<body class="conteudo">
+    <nav>
+        <a href wm-link="series.html" wm-destino=".pagina">Séries</a> |
+        <a href wm-link="linguagens.html" wm-destino=".pagina">Linguagens</a>
+    </nav>
+    <div class="pagina"></div>
+    <script>
+        // Criando mini SPA (Single Page Application)
+
+        function navegarViaAjax(url, seletor, push = true) {
+            if (!url || !seletor) return
+            const elemento = document.querySelector(seletor)
+            fetch(url)
+                .then(resp => resp.text())      // Como recebo HTML, devo tratar como texto (e não JSON, obviamente)
+                .then(html => {
+                    elemento.innerHTML = html
+                    if (push) {                 // Se click não foltar de voltar no histórico (push = false): Como por padrão a inserção por ajax não causa alteração no histórico (o arquivo html continua sendo index.html), forço a inserção no histórico
+                        history.pushState({ seletor/* : seletor */ }, null, url)   // A cada click, adiciono um novo histórico: Associa um objeto que foi responsável pela alteração para ser usado quando for voltar no histórico | Título | Informo a URL que foi alterada para ser adicionada no histórico
+                        // Com isso, a barra de endereço (window.location) também é alterada! :)
+                    }
+                })
+        }
+
+        document.querySelectorAll('[wm-link]').forEach(link => {
+            const url = link.attributes['wm-link'].value
+            const seletorDestino = link.attributes['wm-destino'].value
+
+            link.onclick = e => {
+                e.preventDefault()
+                navegarViaAjax(url, seletorDestino)
+            }
+        })
+
+        window.onpopstate = e => {  // Quando cliente clicar em voltar página
+            if (e.state) {          // Se for verdadeiro
+                navegarViaAjax(window.location.href, e.state.seletor, false)    // Pego o link do histórico e seu seletor (assim, como é uma SPA, coloco o conteúdo no lugar correto) e digo que push é false, para não armazenar no histórico
+            }
+        }
+    </script>
+</body>

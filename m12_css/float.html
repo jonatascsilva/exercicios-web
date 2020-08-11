@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Float</title>
+    <style>
+        body {
+            background-color: #222;
+        }
+
+        /* Float
+            > Flutua os componentes e assim eles deixam de ocupar uma posição,
+            podem navegar livremente conforme eu desejar, logo, outros componentes
+            podem tomar seu lugar, sendo assim, o componente float pode sobrepor
+            estes componentes que estejam na mesma posição que ele, sendo necessário
+            usar a propriedade clear para que seja verificado se há um componente
+            flutuante e evitar a sobreposição.
+            > É interessante para colocar imagen do lado de textos, por exemplo
+            > Observe que o flexblox é muito mais adequado hoje em dia, é muito
+            mais fácil de trabalhar. */
+        .c1 {
+            background-color: red;
+            float: right;
+        }
+
+        .c2 {
+            background-color: green;
+            clear: right;
+            float: left;
+        }
+        
+        .c3 {
+            background-color: blue;
+            clear: both;
+            float: right;
+        }
+
+        .c4 {
+            background-color: orange;
+            clear: both;
+            float: inline-start;
+        }
+
+        p {
+            float: right;
+        }
+
+        div {
+            width: 150px;
+            height: 150px;
+            /* float: right;   Observe que como o float será aplicado na ordem da seq. do código, a div com c1 será a da mais extrema direita, depois vem a div com c2, etc. */
+            /* float: left;   O mesmo para left, a div com c1 será a da mais extrema esquerda, depois vem a div com c2, etc. */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c1"></div>
+    <div class="c2"></div>
+    <div class="c3"></div>
+    <div class="c4"></div>
+</body>
+
+</html>

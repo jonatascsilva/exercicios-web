@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Binding</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+  </head>
+  <body class="exercicio">
+    <div id="app">
+      <p>{{ link }}</p>
+      <!-- Para atribuir à propriedades, é preciso usar a diretiva v-bind do Vue
+      para que ele interpole corretamente a variável
+        - As diretivas são usadas para tratar casos específicos como esse -->
+      <p><a href="{{ link }}">Canal da Cod3r - Ruim</a></p>
+      <p><a v-bind:href="link">Canal da Cod3r - Certo#1</a></p>
+      <!-- Porém, o Vue permite fazer uma tarefa de várias formas, como nesse
+      exemplo, fazer o bind com a diretiva reduzida
+      - Note que o v-bind não faz o two-way data bind, pra isso teremos que usar
+        o v-model -->
+      <p><a :href="link">Canal da Cod3r - Certo#2</a></p>
+      <!-- A diretiva v-model permite que haja a alteração do componente das duas
+      direções (DOM/Renderizado e JS/Dados do Model), o two-way data binding -->
+      <p>
+        <input type="text" v-model="nome" />
+        <span>{{ nome }}</span>
+      </p>
+    </div>
+    <script>
+      // Novo atributo:
+      // - watch: Permite associar um watcher à uma variável do data
+      new Vue({
+        el: '#app',
+        data: {
+          link: 'https://youtube.com/cod3rcursos',
+          nome: 'Maria'
+        },
+        watch: {
+          nome(novoValor) {
+            alert(novoValor)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

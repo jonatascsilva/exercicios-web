@@ -1,0 +1,13 @@
+/* 
+ * Exercício 24:
+ * 
+ *   Escrever um programa para exibir os números de 1 até 50 na tela.
+ */
+
+function imprimirNum1ate50() {
+    for (let i = 1; i <= 50; i++) {
+        console.log(i)
+    }
+}
+
+imprimirNum1ate50()

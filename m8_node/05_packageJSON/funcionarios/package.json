@@ -1,0 +1,21 @@
+{
+  "name": "funcionarios",
+  "version": "1.0.0",
+  "description": "Ola, novo projeto",
+  "main": "funcionarios.js",
+  "scripts": {
+    "start": "nodemon",
+    "meuScriptUseRunPraFunfar": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "funcionarios",
+    "lista",
+    "json"
+  ],
+  "author": "Jonatas",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}

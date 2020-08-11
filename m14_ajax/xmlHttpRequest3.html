@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>XMLHttpRequest #03</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Estados</h1>
+
+    <script>
+        // Consumindo XML com Ajax por XML HTTP Request (mesmo exemplo do xmlHttpRequest1.html)
+        
+        function ajax(config) {
+            const xhr = new XMLHttpRequest()
+            xhr.open(config.metodo, config.url, true)       // Abro requisição com o metodo da config (GET, POST, etc.), obtendo URL do objeto config e definido async = true
+            
+            xhr.onreadystatechange = e => {         // (Alternativa ao onload) Quando readyState do XHR mudar de estado (uma requisição XHR possui cinco estados, de 0 até 4, sendo 4 indicando que a operação foi concluída: https://developer.mozilla.org/pt-BR/docs/Web/API/XMLHttpRequest/readyState)
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {           // Se a resposta for sucesso (200), chamo a callback de sucesso da config com a resposta como param
+                        config.sucesso(xhr.responseXML) // Recebe XML e já faz o parse, assim não irei receber uma string, e sim um objeto XML
+                    } else if (xhr.status >= 400) {     // Se obter erro do cliente (400) ou servidor (500), chamo a callback de erro da config com um objeto contendo as infos.
+                        config.erro({
+                            codigo: xhr.status,
+                            texto: xhr.statusText
+                        })
+                    }
+                }          
+            }
+
+            xhr.send()                              // Envio requisição
+        }
+
+        ajax({
+            url: "dados/estados.xml",
+            metodo: "get",
+            sucesso(resposta) {                        // Se sucesso, crio uma tabela com os estados do Brasil
+                // Recebo objeto XML, que é alterado de forma parecida análoga ao HTML com a DOM
+                const estados = resposta.getElementsByTagName('estado')
+                
+                // Faço reduce (inicializando com string vazia '') nos elementos do array para obter no final uma string com o html montado
+                const itens = Array.from(estados).reduce(
+                    (html, estado) => html + `<li>${estado.attributes.nome.value}</li>`, ''
+                )
+
+                document.body.insertAdjacentHTML('beforeend', `<ul>${itens}</ul>`)
+            },
+            erro(e) {
+                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`)
+                document.body.appendChild(msg)
+            }
+        })
+    </script>
+</body>

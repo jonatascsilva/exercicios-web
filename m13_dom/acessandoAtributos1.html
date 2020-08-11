@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Atributos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <a href='https://www.cod3r.com.br'>Cod3r</a>
+    </div>
+    <div id='primeiro'>
+        <img src='http://files.cod3r.com.br/curso-web/logo-estreita.png' alt='logo'>
+    </div>
+    <script>
+        // Árvore e nós
+        /*
+            Cada retângulo desse representa um nó. Essa nomenclatura vem da estrutura
+        de dados chamada Árvore.
+            https://i.udemycdn.com/redactor/raw/2020-05-25_20-57-28-6703840f4245f147d154996b6b9a7744.jpg
+            Uma árvore é formada por um conjunto de elementos que armazenam informações
+        chamados nodos (ou nós). Toda a árvore possui o elemento chamado raiz, que possui
+        ligações para outros elementos denominados ramos ou filhos. Estes filhos podem
+        estar ligados a outros elementos que também podem possuir outros filhos. O elemento
+        que não possui filhos é conhecido como nó folha, nó terminal ou nó externo.
+        */
+
+        // 1. Acessando atributos explícitos
+        const img = document.querySelector('img')
+        console.log('Modo 1:', img.getAttribute('src')) // Retorna valor do atributo
+        console.log('Modo 2:', img.src)
+        console.log('Modo 3:', img['src'])
+
+        // Node: https://developer.mozilla.org/en-US/docs/Web/API/Node
+
+        // 2. Acessando atributos implícitos (globais)
+        console.log('Elemento "img"..................')
+        console.log('NodeType', img.nodeType)           // Retorna tipo do nó como Integer (1 são elementos, ex.: <p> / 2 são textos dentro de elementos / etc.): https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+        console.log('NodeName', img.nodeName)           // Retorna nome do nó como String: https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName
+
+        const src = img.getAttributeNode('src')         // Obtendo o nó do atributo
+        console.log('Atributo "src"..................')
+        console.log('NodeType', src.nodeType)           
+        console.log('NodeName', src.nodeName)           
+        console.log('NodeValue', src.nodeValue)         // Retorna o valor de um atributo/propriedade: https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+
+        const link = document.querySelector('a')
+        console.log('Elemento "a"..................')
+        console.log('Valor do href', link.href)
+        console.log('firstChild.nodeType', link.firstChild.nodeValue)               // Retorna "Cod3r"           
+        console.log('firstChild.nodeType', link.firstChild.nodeType)
+        link.innerHTML = 'Novo Texto atribuído dentro do texto do link'             // Forma 1
+        link.firstChild.nodeValue = 'Novo Texto atribuído dentro do texto do link'  // Forma 2
+    </script>
+</body>
+
+</html>

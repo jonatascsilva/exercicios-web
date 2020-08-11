@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>XMLHttpRequest #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Estados</h1>
+
+    <script>
+        // Consumindo JSON com Ajax por XML HTTP Request
+        
+        function ajax(config) {
+            const xhr = new XMLHttpRequest()
+            xhr.open(config.metodo, config.url, true)       // Abro requisição com o metodo da config (GET, POST, etc.), obtendo URL do objeto config e definido async = true
+            
+            xhr.onload = e => {                     // Quando receber respota
+                if (xhr.status === 200) {           // Se a resposta for sucesso (200), chamo a callback de sucesso da config com a resposta como param
+                    config.sucesso(xhr.response)
+                } else if (xhr.status >= 400) {     // Se obter erro do cliente (400) ou servidor (500), chamo a callback de erro da config com um objeto contendo as infos.
+                    config.erro({
+                        codigo: xhr.status,
+                        texto: xhr.statusText
+                    })
+                }
+            }
+
+            xhr.send()                              // Envio requisição
+        }
+
+        function criarTabela(estados) {
+            const linhas = estados.map(estado => {          // Pra cada estado, crio uma linha contendo os dados de ID, NOME e SIGLA
+                const tableDataId = document.createElement('td')
+                tableDataId.innerHTML = estado.id
+
+                const tableDataNome = document.createElement('td')
+                tableDataNome.innerHTML = estado.nome
+
+                const tableDataSigla = document.createElement('td')
+                tableDataSigla.innerHTML = estado.sigla
+
+                const tableRow = document.createElement('tr')
+
+                tableRow.appendChild(tableDataId)
+                tableRow.appendChild(tableDataNome)
+                tableRow.appendChild(tableDataSigla)
+
+                return tableRow
+            })
+
+            const tabela = document.createElement('table')
+            linhas.forEach(linha => tabela.appendChild(linha))
+
+            document.body.appendChild(tabela)
+        }
+
+        ajax({
+            url: "dados/estados.json",
+            metodo: "get",
+            sucesso(resposta) {                        // Se sucesso, crio uma tabela com os estados do Brasil
+                const estados = JSON.parse(resposta)   // Espero receber uma lista de estados do Brasil no formato JSON, então faço parse (para obter objeto)
+                console.log('oi')
+                criarTabela(estados)
+            },
+            erro(e) {
+                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`)
+                document.body.appendChild(msg)
+            }
+        })
+    </script>
+</body>

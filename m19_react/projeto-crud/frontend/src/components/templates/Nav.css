@@ -1,0 +1,31 @@
+.Nav {
+  background-color: var(--bg-dark);
+  box-shadow: var(--shadow-nav);
+}
+
+.Nav a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 300;
+  padding: 15px;
+}
+
+.Nav a:hover {
+  background: linear-gradient(135deg, #07a7e3 0%, #32dac3 100%);
+}
+
+@media(max-width: 768px) {
+  .Nav {
+    max-width: 100vw;
+  }
+
+  .Nav > nav {
+    display: flex;
+  }
+
+  .Nav a {
+    flex-grow: 1;
+    text-align: center;
+  }
+}

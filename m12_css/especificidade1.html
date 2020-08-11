@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Especificidade CSS</title>
+    <style>
+        /* https://developer.mozilla.org/pt-BR/docs/Web/CSS/Specificity */
+        /* 
+            Em linhas gerais, qual é a ordem de processamento:
+
+            1. Regras com !important (aplica algo por força bruta, não recomendado)
+            2. Seletores mais específicos
+            3. Última regra processada (caso de empate), ou seja, o último delcarado na linha do código
+        */
+
+        p {
+            background-color: #aaa;     /* Aplica normalmente pois não há nenhuma implicação pois não tem regra maior */
+        }
+
+        .observacao {
+            background-color: #5f5;     /* Classe tem mais importância que p (por ser mais específica do que a tag p) */
+            border: dashed 5px;
+            padding: 20px;
+            font-size: 40px;
+        }
+
+        p.observacao {
+            background-color: #ff0;     /* Classe associada a este p tem mais importância que a classe em si (por ser mais específica) */
+        }
+    </style>
+</head>
+
+<body>
+    <p class='observacao'>Olha essa observação!!!!</p>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox #03</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+        /* Será abordado:
+            > Flex-basis
+            > Flex
+        */
+
+        div {
+            border: solid 5px dodgerblue;
+            font-size: 40px;
+        }
+
+        .flex-container div {
+            box-sizing: border-box;
+            border: solid 5px blue;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-container div {
+        /*
+            > Flex-basis (Main-Axis)
+                Indica o tamanho inicial do flex item antes da distribuição
+            do espaço restante.
+                Quando definimos o flex-grow: 1; e possuímos auto no basis,
+            o valor restante para ocupar o container é distribuído ao redor
+            do conteúdo do flex-item.
+        */
+            flex-basis: auto;   /* Esse é o padrão, ele faz com que a dimensão no sentido da main-axis seja igual ao conteúdo do item */
+            flex-basis: 100px;
+            width: 200px;       /* Se a dimensão estiver no sentido do main-axis, o flex-basis terá prioridade (nesse caso como é no sentido de linha/row, sobrepõe o width) */
+        }
+
+        .flex-container div:nth-child(4) {
+            /*
+                > Flex
+                    Atalho para as propriedades flex-grow, flex-shrink e flex-basis.
+                Geralmente você verá a propriedade flex nos flex itens ao invés de
+                cada um dos valores separados.
+                    Para melhor consistência entre os browsers, é recomendado utilizar
+                a propriedade flex ao invés de cada propriedade separada.
+            */
+            flex: 3 6 100px;    /* Grow | Shrink | Basis */
+        }
+
+        .flex-container {
+            width: 300px;       /* Testando shrink da div4 (diminui 6x mais) */
+            width: 600px;       /* Testando grow da div4 (aumenta 3x mais) */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+</body>
+
+</html>

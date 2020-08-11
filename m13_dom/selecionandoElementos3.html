@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #03</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input,
+        form select,
+        form button {
+            margin: 10px;
+            font-size: 1.6em;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Formulário</h1>
+    <form name="pesquisa" action="http://www.google.com.br/search">
+        <input type="text" name="q" placeholder="Digite o termo...">
+        <select name="hl">
+            <option value="pt-br">Português (Brasil)</option>
+            <option value="en-us">Inglês (Americano)</option>
+        </select>
+        <button>Pesquisar</button>
+    </form>
+    <script>
+        // Selecionando um formulário
+        console.log(document.forms)                             // Retorna todos os formulários da página
+        console.log(document.forms[0])                          // Retorna o formulário de index 0 (primeiro)
+        console.log(document.forms.item(0))                     // Mesmo que o de cima, porém não retorna undefined se não exisitir (retorna null)
+        console.log(document.getElementsByName('pesquisa'))     // Retorna NodeList contendo todos os elementos pelo atributo name (no caso, só um form)
+        console.log(document.pesquisa)                          // Mesmo que o de cima, mas retorna apenas o primeiro elemento para o atributo name com valor 'pesquisa'
+
+        // Selecionando um elemento de um formulário
+        console.log(document.pesquisa.q)                        // Retorna o elemento dentro de pesquisa com o atributo name com valor 'q'
+        document.pesquisa.q.value = 'Linux Brasil'              // Atribuo um novo valor para o elemento com name 'q'
+        document.pesquisa.hl.value = 'en-us'                    // Atribuo um novo valor para o elemento com name 'hl'
+        console.log(document.pesquisa.hl.selectedIndex)         // Obtenho qual o index do dropbox que está atualmente selecionado pelo usuário
+    </script>
+</body>
+
+</html>

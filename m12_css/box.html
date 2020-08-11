@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Box Model</title>
+    <style>
+        /* Box Model
+            > Todas as tags visuais (que são renderizadas) são retangulares (box) e possuem atributos
+            para definir seu local/espaço dentro de um HTML, são eles (da parte mais interna até a externa):
+                - Content: É referente ao próprio conteúdo do elemento
+                - Padding: Define espaçamento entre o content e o border
+                - Border: Define uma borda no elemento, o valor de largura/altura do elemento será válido (fará efeito) até aqui
+                - Margin: Define o espaçamento (margem) entre componentes
+            > É possível visualizar graficamente estes atributos no inspect do browser.
+        */
+
+        body { font-size: 80px; margin: 0; }
+        .c1 { background-color: orange; }
+        .c2 { background-color: skyblue; }
+        .c3 { background-color: tomato; }
+
+        div {
+            float: left;                    /* Remove block das divs (assim elas não ocupam uma linha inteira, mas sim o seu próprio conteúdo limitado por largura/altura definido elo box model), e alinha na esquerda */
+
+            /* padding: 10px;                  Aplica este padding para: 10px = top/right/bottom/left */
+            /* padding: 10px 50px;             Aplica este padding para: 10px = top/bottom e 50px = right/left */
+            /* padding: 10px 50px 100px;       Aplica este padding para: 10px = top , 50px = right/left e 100px = bottom */
+            padding: 10px 50px 100px 150px; /* Aplica este padding na seguinte ordem: top/right/bottom/left */
+
+            margin: 10px;                   /* A atribuição de valores segue o mesmo princípio do padding */
+
+            border: solid 10px black;                   /* A atribuição de valores segue o mesmo princípio do padding */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c1">1</div>
+    <div class="c2">2</div>
+    <div class="c3">3</div>
+</body>
+
+</html>

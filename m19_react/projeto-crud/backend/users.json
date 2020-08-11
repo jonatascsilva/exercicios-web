@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "name": "José Silva",
+      "email": "jose_silva@gmail.com",
+      "phone": "+5513988125547",
+      "id": 1
+    },
+    {
+      "name": "Ana Sousa",
+      "email": "anasousa@hotmail.com",
+      "phone": "+551198856642",
+      "id": 2
+    }
+  ]
+}

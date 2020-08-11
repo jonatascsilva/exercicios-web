@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Origem CSS: Externo, Interno e Inline</title>
+    <style>
+        body {
+            background-color: aquamarine;
+        }
+    </style>
+    <link rel="stylesheet" href="css/origem.css"><!-- Rel indica a relação do link informado -->
+    <!--    A prioridade de aplicação de um estilo é
+        sempre definido pela ordem de execução do código.
+        Nesse caso, entre a tag style e o style importado,
+        o importado qque será aplicado.
+            Exceto pelo style inline (colocado diretamente
+        na tag), que tem prioridade máxima. -->
+</head>
+
+<body style="background-color: coral;">
+    <h1>E agora?</h1>
+</body>
+
+</html>

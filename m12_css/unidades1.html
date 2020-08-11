@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Unidades #01</title>
+    <style>
+        /* Unidades
+            > Absolutas:
+                - px            Pixel, lembrando que 1 px pode varia conforme densidade do monitor do dispositivo
+                - cm, mm...     Mais usadas para impressão
+            > Relativas:
+                Página e elementos:
+                    - %             Obtém medidas em porcentagem em relação ao elemento pai
+                    - vh            Obtém medida em relação à altura total do viewport (viewport é o tamanho visível do website no dispositivo), indo de 0 até 100, sendo 1 vh = 1/100 da altura do viewport
+                    - vw            Obtém medida em relação à altura total do viewport
+                    - vmin          Menor tamanho do viewport (se estiver no modo paisagem, é a altura / se no retrato, é a largura)
+                    - vmax          Maior tamanho do viewport (se estiver no modo paisagem, é a largura / se no retrato, é a altura)
+                Fontes:
+                    - rem           Tamanho relativo da fonte em relação ao valor de fonte da raíz do website, que é a tag html (ex.: html (gerado pelo browser: 50px) > div (0.5rem = 25px) > p (1rem = 50px))
+                    - em            Tamanho relativo da fonte em relação a fonte do seu elemento pai (ex.: body (50px) > div (75px) > p (2em = 150px))
+        */
+
+        .unidades-absolutas {
+            position: absolute;
+            font-size: 40px;
+            padding: 20px;
+            border: solid 5px #222;
+            margin: 30px;
+            width: 4cm;                 /* Unidade pouco usada */
+            height: 20mm;               /* Unidade pouco usada */
+            top: 150px;                 /* Posiciona 150px em relação ao topo da página até a margem superior do elemento */
+            left: 200px;                /* Posiciona 200px em relação à lateral da página até a margem esquerda do elemento */
+        }
+
+        .unidades-relativas {
+            position: absolute;
+            font-size: 4em;             /* Obtém tamanho da fonte padrão do browser e multiplica por 4 */
+            padding: 5%;
+            border: solid 1vw #222;
+            margin: .8%;
+            width: 20vw;
+            height: 15vw;
+            bottom: 5%;
+            right: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="unidades-absolutas">Opa!</div>
+    <div class="unidades-relativas">Epa!</div>
+</body>
+
+</html>

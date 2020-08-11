@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox #02</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+        /* Será abordado:
+            > Order
+            > Flex-grow
+            > Flex-shrink
+        */
+
+        div {
+            border: solid 5px dodgerblue;
+            font-size: 40px;
+        }
+
+        .flex-container div {
+            box-sizing: border-box;
+            border: solid 5px blue;
+        }
+
+        .flex-container {
+            display: flex;
+            height: 300px;
+            width: 600px;
+        }
+
+        .flex-container div:nth-child(3) {
+            background-color: red;
+
+            /*
+                > Order
+                    Modifica a ordem dos flex itens. Sempre do menor para o maior,
+                assim order: 1, aparece na frente de order: 5.
+                    0 é o valor padrão e isso significa que a ordem dos itens será
+                a ordem apresentada no HTML. Se você quiser colocar um item do meio
+                da lista no início da mesma, sem modificar os demais, o ideal é
+                utilizar um valor negativo para este item, já que todos os outros são 0.
+            */
+            order: 1;           /* Elemento div com o conteúdo "3" irá aparecer no end da main-axis por ter mais prioridade */
+            order: 0;           /* Volta para o padrão (HTML quem define a ordem) */
+            order: -1;          /* Elemento div com o conteúdo "3" irá aparecer no start da main-axis por ter menos prioridade */
+
+            /*
+                > Align-self (Cross-Axis)
+                    O align-self serve para definirmos o alinhamento específico de
+                um único flex item dentro do nosso container. Caso um valor seja
+                atribuído, ele passara por cima do que for atribuído no align-items do container.
+            */
+            align-self: center;     /* Somente esta div fica centralizada no cross-axis */
+            align-self: flex-end;
+            align-self: flex-start;
+            align-self: stretch;
+            align-self: auto;       /* Valor padrão obtido pelo align-items no flex-containter */
+        }
+
+        .flex-container div {
+            width: 200px;
+
+            /*
+                > Flex-grow (Main-Axis)
+                    Define a habilidade de um flex item crescer. Por padrão o valor é zero, assim
+                os flex itens ocupam um tamanho máximo relacionado o conteúdo interno deles ou ao
+                width definido.
+                    Ao definir 1 para todos os Flex Itens, eles tentarão ter a mesma largura e vão
+                ocupar 100% do container. Digo tentarão pois caso um elemento possua um conteúdo
+                muito largo, ele irá respeitar o mesmo.
+                    Se você tiver uma linha com quatro itens, onde três são flex-grow: 1 e um
+                flex-grow: 2, o flex-grow: 2 tentará ocupar 2 vezes mais espaço extra do que os
+                outros elementos.
+                    OBS: justify-content não funciona em items com flex-grow definido.
+            */
+            flex-grow: 0;       /* Valor padrão, os elementos irão ocupar o seu próprio conteúdo ou suas dimensões previamente definidas */
+            flex-grow: 1;       /* Será dividido a parte vazia (que não foi preenchida da main-axis) e aplicado igualmente para os elementos (assim, preenchendo a main-axis toda) */
+        }
+
+        .flex-container div:nth-child(1) {
+            /* 
+                    Aqui temos a seguinte situação, o espaço vazio tem 200px e cada elemento tem 100px de largura 
+                    Para dividir o espaço vazio e aplicar nos elementos, é somado os valores do flex-grow:
+                        > 1 (div 2) + 1 (div 3) + 1 (div 4) + 2 (div 1, declarado abaixo) = 5
+                    Logo, é dividido o espaço em branco (200px) por 5 = 40px, e aplicado este valor * 2 na div com flex-grow=2
+                e nas outras é aplicado o valor de 40px.
+            */
+            flex-grow: 2;       
+        }
+
+        .flex-container {
+            width: 300px;
+
+            /*
+                > Flex-shrink (Main-Axis)
+                    Define a capacidade de redução de tamanho do item.
+            */
+                flex-shrink: 1;     /* Valor padrão, permite que os itens tenham os seus tamanhos (seja esse tamanho definido a partir de width ou flex-basis) reduzidos para caber no container. */
+                flex-shrink: 0;     /* Não permite a diminuição dos itens, assim um item com flex-basis: 300px; nunca diminuirá menos do que 300px, mesmo que o conteúdo não ocupe todo esse espaço. */
+        }
+
+        .flex-container div:nth-child(1) {
+            flex-shrink: 5;         /* Elemento poderá diminuir cinco vezes mais que os outros (segue o mesmo cálculo que flex-grow, mas o valor base para ser calculado será o do container) */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+</body>
+
+</html>

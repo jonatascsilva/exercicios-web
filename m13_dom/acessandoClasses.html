@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Classes</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        Classes
+    </div>
+    <script>
+        // Acessando classes de CSS
+        const classes = document.querySelector('div').classList     // Tipo DOMTokenList
+        
+        classes.add('destaque')
+        classes.remove('destaque')
+        classes.toggle('destaque')                  // Se existe ele remove, se não existe ele adiciona
+        console.log(classes.contains('destaque'))   // Verifica se a classe existe
+        console.log(classes.length)                 // Quantidades de classes declaradas no elemento = 1
+        classes.toggle('destaque')
+        console.log(classes.length)                 // = 0
+        
+        classes.add('destaque1')                    // Apesar de não existirem, serão declaradas/listadas mesmo assim
+        classes.add('destaque2')
+        classes.forEach(classe => console.log(classe))
+        for (let c of classes) console.log(c)
+    </script>
+</body>
+
+</html>

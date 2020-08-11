@@ -1,0 +1,87 @@
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #03</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .esquerda {
+            height: 100vh;
+            width: 50%;
+            background-color: coral;
+        }
+        
+        .direita {
+            height: 100vh;
+            width: 50%;
+            background-color: cornflowerblue;
+        }
+        
+        .item {
+            border: solid 5px black;
+            background-color: darkgrey;
+            color: white;
+            height: 100px;
+            font-size: 40px;
+            margin: 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .titulo {
+            font-size: 2em;
+            font-weight: bolder;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="esquerda" wm-dropzone>
+        <p class="titulo">Esquerda</p>
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+    </div>
+    <div class="direita" wm-dropzone>
+        <p class="titulo">Direita</p>
+    </div>
+    <script>
+        // Criando áreas de drag'n'drop
+
+        // Obtenho qualquer item dentro de uma dropzone
+        const items = document.querySelectorAll('[wm-dropzone] .item')
+        items.forEach((item, index) => {
+            item.draggable = true                               // Tornando um item arrastável
+            item.id = item.id || `draggable-item-${index}`      // Se o item não tiver id, associo um novo: id="draggable-item-index"
+            item.ondragstart = e =>                             // Quando detectar um drag (arrastamento)
+                e.dataTransfer.setData('item-id', e.target.id)      // guarda o id do item sendo arrastado (e.target.id) dentro de um identificador do tipo personalizado (item-id), o ideal é usar MIME type, vide documentação
+        })
+
+        const dropzones = document.querySelectorAll('[wm-dropzone')
+        dropzones.forEach(dropzone => {
+            // Ondragover trata o momento quando solta o click do mouse durante um arraste para uma área de drop válida
+            // Por default, não é possível fazer o drag'n'drop, logo, é preciso cancelar essa ação com o preventDefault
+            dropzone.ondragover = e => e.preventDefault()
+            dropzone.ondrop = function(e) {
+                const id = e.dataTransfer.getData('item-id')    // Obtenho o id do elemento arrastado que foi guardado no datatransfer
+                const item = document.getElementById(id)        // Associo o id recebido em uma variável
+                // e.target.appendChild(item)                   // Insiro o elemento como filho do target em que o mouse aponta (pode ser inclusive os elementos filhos da dropzone)
+                dropzone.appendChild(item)                      // Para evitar que o elemento fique dentro de outros, defino a área de destino como a dropzone
+            }
+        })
+    </script>
+</body>
+
+</html>

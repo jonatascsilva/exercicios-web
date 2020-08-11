@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #04</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input,
+        form select,
+        form button {
+            margin: 10px;
+            font-size: 1.6em;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Formulário</h1>
+    <form name="pesquisa" action="http://www.google.com.br/search">
+        <input type="text" name="q" placeholder="Digite o termo...">
+        <select name="hl">
+                <option value="pt-br">Português (Brasil)</option>
+                <option value="en-us">Inglês (Americano)</option>
+            </select>
+        <button wm-submit>Pesquisar</button>
+    </form>
+    <script>
+        // Interceptando a submit de um formulário
+        
+        // 1. Interceptando pelo envio do form
+        const form = document.forms[0]
+
+        form.onsubmit = function(e) {
+            e.preventDefault()
+
+            // Dados ficam armazenados em um objeto chamado formdata
+            const form = e.target                       // Obtenho o formulario
+            const formData = new FormData(form)         // Instancio os dados do formulario dentro de uma variável
+            
+            formData.append('ajax', true)               // Crie uma nova informação no formulário que não havia antes (nome: Ajax, valor: true)
+            console.log(formData.get('q'))              // Visualizo valor da input q
+            console.log(formData.has('q'))              // Confiro se hl foi preenchido
+
+            for (let dado of formData) {                // Itero todos os elementos do meu form
+                console.log(dado)
+            }
+        }
+
+        // 2. Interceptando pelo click do botão
+        /* 
+        const submit = document.querySelector('[wm-submit]')
+
+            submit.onclick = function(e) {
+            e.preventDefault()
+
+            // Dados ficam armazenados em um objeto chamado formdata
+            const form = e.target.parentNode            // Obtenho o formulario pelo parent do botão clicado
+            const formData = new FormData(form)         // Instancio os dados do form
+            
+            formData.append('ajax', true)               // Crie uma nova informação no formulário que não havia antes (nome: Ajax, valor: true)
+            console.log(formData.get('q'))              // Visualizo valor da input q
+            console.log(formData.has('q'))              // Confiro se hl foi preenchido
+
+            for (let dado of formData) {                // Itero todos os elementos do meu form
+                console.log(dado)
+            }
+        }
+        */
+    </script>
+</body>
+</html>

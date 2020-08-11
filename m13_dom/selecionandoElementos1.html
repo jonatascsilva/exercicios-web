@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #01</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body class="conteudo exercicio">
+    <div id="primeiro">#primeiro</div>
+    <div>Segundo</div>
+    <div class="terceiro ultimo">.terceiro .ultimo</div>
+    <script>
+        // NodeList e seus métodos: https://developer.mozilla.org/pt-BR/docs/Web/API/NodeList
+        // HTMLCollection e seus métodos: https://developer.mozilla.org/pt-BR/docs/Web/API/HTMLCollection
+
+        // 1. Selecionando elemento pela sua ID
+        document.getElementById('primeiro').classList.add('destaque')
+
+        // 2. Selecionando elementos pelo nome da tag (recebe vários elementos)
+        const divs = document.getElementsByTagName('div')
+        // console.dir(divs) ou somente dir (divs)                      // Se fizer este comando no console do browser irá verificar que estamos recebendo um elemento do tipo HTMLCollection, que permite iteração
+        
+        Array.from(divs).forEach(e => e.classList.remove('destaque'))   // Mas, para tratar os elementos como um array (usando map, reduce...), é necessário transformar em array, modo 1 é com o Array.from
+        const divsArray = [...divs]                                     // e o modo 2 é com o operador spread
+        divsArray.forEach(e => e.classList.add('destaque'))
+
+        // 3. Selecionando elementos pela classe que foi atribuída à eles
+        const ultimosElementos = document.getElementsByClassName('ultimo')
+        for (let e of ultimosElementos) {
+            e.classList.remove('destaque')
+        }
+    </script>
+</body>
+</html>

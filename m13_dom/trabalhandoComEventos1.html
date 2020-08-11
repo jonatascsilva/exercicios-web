@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <!-- <a href="https://google.com.br" onclick="navegarEm5s(event)">Google</a>    // Declarando explicitamente, mas é mais difícil de flexibilizar -->
+        <a esperar-um-pouco="5000" href="https://google.com.br">Google</a>
+    </div>
+    <script>
+        // Interceptando um click
+        function clickComDelay(e) {
+            e.preventDefault()      // Prevenindo a ação padrão do click
+            
+            console.log(`Saindo em ${delay / 1000}s...`)
+
+            setTimeout(() => {
+                const link = e.target               // Dentro do evento existe o target, no caso, foi o link (href)
+                window.location.href = link.href    // Substituo o endereço da browser pelo link obtido no click do evento
+            }, delay)
+        }
+
+        const link = document.querySelector('[esperar-um-pouco]')   // Obtenho elemento do link
+        const delay = link.getAttribute('esperar-um-pouco')         // Obtenho valor do atributo delay
+        
+        link.onclick = clickComDelay                                // Associo o evento click do elemento especificado à função que criei
+    </script>
+</body>

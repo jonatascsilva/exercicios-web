@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Aplicando Estilo</title>
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script src="/js/vue.min.js"></script>
+  <style>
+    .lightgray-bg {
+      background-color: #eee;
+    }
+
+    .gray-color {
+      color: red;
+    }
+  </style>
+</head>
+
+<body class="exercicio">
+  <!-- Aplicando estilos CSS com eventos -->
+  <div
+    id="app"
+    div @click="aplicarClasse"
+    :class="{
+      'gray-color': estadoClasse,
+      'lightgray-bg': estadoClasse
+    }"
+  >
+      <a style="text-decoration: none; color: inherit" href="#">Clique</a>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        estadoClasse: false
+      },
+      methods: {
+        aplicarClasse() {
+          this.estadoClasse = !this.estadoClasse
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

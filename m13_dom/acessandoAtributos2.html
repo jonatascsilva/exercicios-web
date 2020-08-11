@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Atributos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <label for="compras">Compras</label>
+        <ul id="compras" destino='escritório' data-urgencia="5">
+            <li>Café</li>
+            <li>Água</li>
+            <li>Copo Descartável</li>
+        </ul>
+    </div>
+    <script>
+        // Acessando atributos
+        const lista = document.querySelector('div ul[destino="escritório"]')
+        console.log('Elemento ul.................')
+        console.log('childNodes', lista.childNodes)
+        console.log('id', lista.id)                                            // Acessa atributo padrão do html por notação ponto
+        console.log('destino', lista.destino)                                  // Não acessa por notação ponto atributos personalizados
+        console.log('getAttribute=destino', lista.getAttribute('destino'))     // Acessa!
+        console.log('hasAttribute=destino', lista.hasAttribute('destino'))     // true = Existe!
+        
+        // Setando atributos
+        lista.setAttribute('destino', 'empresa')                               // Alterei o atributo destino
+        console.log('getAttribute=destino', lista.getAttribute('destino'))     // Alterei!
+        lista.setAttribute('status', 'aberto')                                 // Como não existe, cria um novo atributo
+        console.log('getAttribute=status', lista.getAttribute('status'))       // Criei!
+        
+        // Removendo atributos
+        lista.removeAttribute('destino')                                       // Como não existe, cria um novo atributo
+        console.log('hasAttribute=destino', lista.hasAttribute('destino'))     // Removi
+
+
+        // Atributos de metadados
+        //     Quando se quer armazenar atributos de metadados (como quantidade de colunas, elemento pai, etc.)
+        // usa-se o prefixo data- nesses atributos: https://developer.mozilla.org/pt-BR/docs/Web/Guide/HTML/Using_data_attributes
+        console.log(lista.dataset)                  // Verificando todos os atributos com prefixo data- (observe que não é exibido o data- nos seus nomes)
+        console.log(lista.dataset.urgencia)
+        lista.dataset.urgencia = 4
+        console.log(lista.dataset.urgencia)
+        console.log(lista.getAttribute('data-urgencia'))
+
+        // Acessando atributos que possuem comportamento diferente na notação ponto
+        const label = document.querySelector('label')
+        console.log(label.for)                  // undefined
+        console.log(label.htmlFor)              // compras
+        console.log(label.getAttribute('for'))  // compras
+    </script>
+</body>
+
+</html>

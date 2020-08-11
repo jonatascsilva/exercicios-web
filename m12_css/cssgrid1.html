@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Grid #01</title>
+    <style>
+        /* https://caniuse.com/#feat=css-grid */
+        
+        html,
+        body {
+            margin: 20px;
+            height: calc(100% - 40px);
+            background-color: lightgray;
+        }
+        
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            border: solid 5px dodgerblue;
+            background: #fff;
+        }
+
+        /* CSS Grid
+            https://www.origamid.com/projetos/css-grid-layout-guia-completo/
+
+            > É bidimensional, possui linhas e colunas (não tem direção como o flex)
+            > É possível utilizar o order, justify-content, align-items, justify-items
+            e align-content assim como no flexbox
+        */
+
+        /* Será abordado:
+            > Grid-template-columns
+            > Grid-template-rows
+            > Grid-column-start
+            > Grid-column-end
+            > Grid-row-start
+            > Grid-row-end
+            > Z-index
+        */
+        body {
+            display: grid;
+
+            /*
+                > Grid-template-columns
+                    Define o número total de colunas que serão criadas no grid.
+            */
+            grid-template-columns: 50% 50%;                         /* Define duas colunas com 50% de largura para cada = ocupando 100% da largura total disponível */
+            grid-template-columns: repeat(4, 8.33% 8.33% 8.33%);    /* Define 12 (4x3) colunas com 8.33% de largura para cada = ocupando 100% da largura total disponível */
+            grid-template-columns: repeat(4, 8.33%);                /* 4 colunas com 8.33% de largura cada = ocupando 33,32% da largura total disponível */
+            grid-template-columns: repeat(11, 100px) 200px;         /* 11 colunas com 100px de largura cada + 1 com 200px */
+            grid-template-columns: 200px 20% 1fr;                   /* Três colunas são criadas, a primeira terá 200px de largura, a segunda com 20% da largura total e a última irá se expandir até o final da largura disponível. */
+            grid-template-columns: minmax(200px, 1fr) 1fr 1fr;      /* Três colunas são criadas, a primeira terá no mínimo 200px de largura e no máximo 1fr(isso significa que após 200px ela se expande da mesma forma que as outras colunas). As outras duas colunas vão ter 1fr. */
+            grid-template-columns: 3fr 6fr 3fr;                     /* Divido a largura total atual em 12 fr (fragmentos, medida relativa), e aplico 3 * fr na primeira coluna, 6 * fr na segunda e 3 * fr na terceira */
+
+            /*
+                > Grid-template-rows
+                    Define a quantidade total de linhas que serão criadas no grid.
+            */
+            grid-template-rows: 50% 25% 12.5% 12.5%;                /* Defino 4 linhas com larguras relativas */
+            grid-template-rows: 100px 1fr;                          /* Defino 2 linhas: uma com 100px e outra com 1fr (ocupa o máximo espaço restante).
+                                                                        Observe que neste caso definimos que teríamos 3 colunas, então pra 12 elementos preciso de 4 linhas.
+                                                                        Como especifiquei somente 2, as outras 2 restantes serão renderizadas com suas alturas apenas para comportar seus respectivos conteúdos */
+            grid-template-rows: 100px 100px;                        /* Defino 2 linhas: as duas com 100px. As outras duas irão pegar a altura remanescente e dividir de forma igualitária (como se autodefinissem com 1fr). */
+            grid-template-rows: 100px auto auto auto;               /* Defino 1 linha com 100px, as outras duas irão pegar a altura remanescente e dividir de forma igualitária */
+
+            /*
+                > Grid-template
+                    Shortand para template-rows e template-columns
+            */
+            grid-template: 100px auto auto auto / 3fr 6fr 3fr;      /* rows | columns */
+        }
+
+        .d8 {
+            /*
+                > Grid-column-start / Grid-column-end
+                > Grid-row-start / Grid-row-end
+
+                    Define quais colunas serão ocupadas pelo grid item. É possível
+                definir uma linha de início e final, assim o item irá ocupar múltiplas
+                colunas.
+
+                    Em outras palavras, permite definir que uma célula ocupe mais
+                de uma coluna/linha, seria uma função semelhante a função de mesclar
+                células do Excel, exceto que o conteúdo da casa "invadida"/mesclada
+                será empurrado para a próxima posição.
+
+                    O Firefox possui uma ferramenta muito boa para visualizar grids
+                e flex-box.
+
+                    Observe que neste exemplo temos 3 colunas x 4 linhas, então temos
+                4 linhas delimitadoras de colunas x 5 linhas delimitadoras de linhas,
+                é com elas que iremos apontar onde uma célula inicia ou termina.
+                    1   2   3   4
+                  1 -------------
+                    |   |   |   |
+                  2 -------------
+                    |   |   |   |
+                  3 -------------
+                    |   |   |   |
+                  4 -------------
+                    |   |   |   |
+                  5 -------------
+            */
+            
+            /* Aumentando colunas de uma célula */
+            grid-column-start: 2;           /* Célula da div "8" irá iniciar da "linha delimitadora de colunas 2" */
+            grid-column-end: 4;             /* e terminar na "linha delimitadora de colunas 4", assim ela ocupa a coluna 2 e coluna 3 */
+            grid-column-end: span 2;        /* Ou, ao invés de especificar o número da linha delimitadora final, usa-se o spa para dizer quantas colunas "invadir", aqui vai invadir a coluna atual + 1 */
+            
+                /* Usando propriedade shorthand */
+                grid-column: 2 / 4;         /* Linhas divisorias de inicio / fim */
+                grid-column: span 2;        /* ou uso span apenas */
+
+            /* Aumentando linhas de uma célula */
+            grid-row-start: 3;              /* Mesma lógica para colunas */
+            grid-row-end: 5;
+            grid-row-end: span 2;
+
+                /* Usando propriedade shorthand */
+                grid-row: 3 / 5;            /* Linhas divisorias de inicio / fim */
+                grid-row: span 2;           /* ou uso span apenas */
+        }
+
+        .d10,
+        .d11 {
+            /* Verificando que pode haver sobreposição no CSS Grid */
+            grid-column-start: 1;
+            grid-column-end: span 2;
+            grid-row-start: 5;
+            grid-row-end: span 1;
+            /* As div's "10" e "11" se sobreporam pois defini a mesma posição em coluna/linha para ambas */
+        }
+
+        .d10 {
+            /*
+                https://www.w3schools.com/cssref/playit.asp?filename=playcss_z-index&preval=2
+
+                > Z-index
+                    Define a posição de um elemento no eixo Z, que apesar de termos um ambiente 2D
+                ainda é possível determinar a ordem dos elementos sobrepostos por layers usando o
+                próprio eixo z.
+            */
+            z-index: -1;     /* A div "10" irá ficar escondida, pois está uma camada abaixo da div "11" */
+            z-index: auto;    /* A div "10" irá ficar escondida, pois quem define a ordem é a declaração na ordem da linha de código */
+            z-index: 1;      /* A div "10" irá ficar exposta, ou seja, uma camada acima da div "11" */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d1">1</div>
+    <div class="d2">2</div>
+    <div class="d3">3</div>
+    <div class="d4">4</div>
+    <div class="d5">5</div>
+    <div class="d6">6</div>
+    <div class="d7">7</div>
+    <div class="d8">8</div>
+    <div class="d9">9</div>
+    <div class="d10">10</div>
+    <div class="d11">11</div>
+    <div class="d12">12</div>
+</body>
+
+</html>

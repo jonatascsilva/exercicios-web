@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulando CSS</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Manipulando CSS</h1>
+    <div id="div1">1</div>
+    <div id="div2">2</div>
+    <div id="resultado"></div>
+    <script>
+        // Manipulando CSS
+
+        // Atributos CSS
+
+            // Lendo atributos do CSS de um elemento
+            const fonte = $('#div1').css('font-family')
+            $('#resultado').append(`Fonte é ${fonte}`)
+            
+            // Alterando um atributo do CSS
+            $('#div1').css('font-size', '3em')
+
+            // Alterando vários atributos do CSS
+            $('#div1').css({ 'font-size': '3em', 'color': 'red' })
+            
+            // Alterando por lógica
+            $('#div1').css('font-size', function () {
+                return `${4 * 2}em`
+            })
+
+        // Classes CSS
+
+            // Adicionando classe (vindo de arquivo CSS externo)
+            $('#div2').addClass('destaque')
+            
+            // Removendo classe
+            $('#div2').removeClass('destaque')
+            
+            // Alternando classe
+            $('#div2').toggleClass('destaque')
+
+            // Verificando se classe existe
+            const temClasse = $('#div2').hasClass('destaque')
+            $('#resultado').append(`<br>Div2 tem classe "destaque"? ${temClasse}`)
+            </script>
+</body>
+</html>

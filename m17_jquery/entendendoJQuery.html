@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Entendendo jQuery</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/jquery.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Entendendo jQuery</h1>
+    <div>1</div>
+    <div>2</div>
+
+    <script>
+        // Seleciona diversos componentes e aplica métodos sem a necessidade de
+        // realizar forEach
+        $('div').hide(5000).show(5000).fadeOut(5000)
+
+        // Observe que os objetos que o jQuery trabalha não são diretamente os
+        // retornados pela DOM.
+        // O jQuery usa o padrão Decorator, onde estende o objeto da DOM
+        // adicionando novas funcionalidades sem necessidade de herança, apenas
+        // usando o nó original para aplicar as mudanças e exibir para o usuário
+        console.log($('div').get(0)/* Erro: DOM não tem .hide(100) */)
+
+        // Verificando que o jQuery retorna objeto (nulo, se não associado)
+        console.log($.isEmptyObject({}))
+
+        // Usando métodos do jQuery
+        console.log(jQuery.inArray(3, [1, 2, 3]))
+
+        // Criando novos métodos
+        $.fn.fundoVerde = function () {
+            this.css('background-color', 'green')
+            return this  // Necessário para permitir o encadeamento de métodos
+        }
+
+        $('body').fundoVerde().fadeOut(1000).fadeIn(1000)
+    </script>
+</body>
+
+</html>
